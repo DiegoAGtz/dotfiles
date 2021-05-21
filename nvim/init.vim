@@ -7,11 +7,11 @@ set showcmd
 set ruler
 set encoding=utf-8
 set showmatch
-set sw=3
-set tabstop=3
+set sw=4
+set tabstop=4
 set expandtab
 set smarttab
-set shiftwidth=3
+set shiftwidth=4
 set relativenumber
 set laststatus=2
 set clipboard=unnamedplus
@@ -56,13 +56,6 @@ nmap <Leader>L gT
 
 " Mapeo salir modo insertar
 imap jj <Esc>
-
-" Mapeo autocompletar parentesis, llaves, ...
-inoremap ( ()<Esc>i
-inoremap { {}<Esc>i
-inoremap [ []<Esc>i
-inoremap " ""<Esc>i
-inoremap ' ''<Esc>i
 
 " configs
 source $HOME/.config/nvim/config/coc.vim
