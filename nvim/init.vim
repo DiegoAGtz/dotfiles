@@ -1,3 +1,4 @@
+set nocompatible
 set number
 set relativenumber
 set numberwidth=1
@@ -31,6 +32,7 @@ Plug 'ryanoasis/vim-devicons'
 
 " IDE
 Plug 'easymotion/vim-easymotion'
+Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'preservim/nerdtree'
 Plug 'mattn/emmet-vim'
