@@ -10,6 +10,7 @@ nmap <Leader>vs :vsplit
 nmap <Leader>hs :split 
 nmap <Leader>l gt
 nmap <Leader>L gT
+nmap <Leader>nt :tabnew 
 
 " Mapeo salir modo insertar
 imap jj <Esc>
