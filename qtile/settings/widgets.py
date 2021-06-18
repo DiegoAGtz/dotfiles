@@ -64,13 +64,11 @@ def workspaces():
 
 primary_widgets = [
     *workspaces(),
-
     separator(),
-
     powerline('color4', 'dark'),
 
+
     icon(bg="color4", text=' '), # Icon: nf-fa-download
-    
     widget.CheckUpdates(
         background=colors['color4'],
         colour_have_updates=colors['text'],
@@ -80,55 +78,33 @@ primary_widgets = [
         update_interval=1800,
         custom_command='checkupdates',
     ),
-
     powerline('color3', 'color4'),
 
     # icon(bg="color3", text=' '),  # Icon: nf-fa-feed
-    
     # widget.Net(**base(bg='color3'), interface='enp0s20u2'),
-    
-    icon(bg="color3", text=' '),
+    # icon(bg="color3", text=' '),
+    # widget.Pomodoro(**base(bg='color3', fg='light'), color_inactive='ffffff', color_active='ffffff', color_break='ffffff'),
+    # powerline('dark', 'color3'),
 
-    widget.Pomodoro(**base(bg='color3', fg='light'), color_inactive='ffffff', color_active='ffffff', color_break='ffffff'),
-
-    powerline('dark', 'color3'),
-
-    icon(bg="dark", text='墳 ', fg='light'), 
-
-    widget.Volume(**base(bg='dark', fg='light')),
-
-    powerline('color2', 'dark'),
-
-    widget.CurrentLayoutIcon(**base(bg='color2'), scale=0.65),
-
-    widget.CurrentLayout(**base(bg='color2'), padding=5),
-
-    powerline('color1', 'color2'),
-
+    icon(bg="color3", text='墳 ', fg='dark'), 
+    widget.Volume(**base(bg='color3', fg='dark')),
+    powerline('color1', 'color3'),
     icon(bg="color1", fontsize=17, text=' '), # Icon: nf-mdi-calendar_clock
-
     widget.Clock(**base(bg='color1'), format='%d/%m/%Y - %H:%M '),
-
     powerline('dark', 'color1'),
 
+    widget.CurrentLayoutIcon(**base(bg='dark'), scale=0.65),
     widget.Systray(background=colors['dark'], padding=5),
 ]
 
 secondary_widgets = [
     *workspaces(),
-
     separator(),
-
     powerline('color1', 'dark'),
-
     widget.CurrentLayoutIcon(**base(bg='color1'), scale=0.65),
-
     widget.CurrentLayout(**base(bg='color1'), padding=5),
-
     powerline('color2', 'color1'),
-
     widget.Clock(**base(bg='color2'), format='%d/%m/%Y - %H:%M '),
-
     powerline('dark', 'color2'),
 ]
 
