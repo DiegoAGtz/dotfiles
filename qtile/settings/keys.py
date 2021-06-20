@@ -37,6 +37,9 @@ keys = [Key(key[0], key[1], *key[2:]) for key in [
     ([mod], "period", lazy.next_screen()),
     ([mod], "comma", lazy.prev_screen()),
 
+    # Switch keyboard layout
+    ([mod], "space", lazy.widget["keyboardlayout"].next_keyboard()),
+
     # Restart Qtile
     ([mod, "control"], "r", lazy.restart()),
 
