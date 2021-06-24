@@ -12,5 +12,5 @@
 # volumeicon &
 
 xfce4-clipman &
-telegram-desktop &
+# telegram-desktop &
 megasync &
