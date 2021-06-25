@@ -34,8 +34,12 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'easymotion/vim-easymotion'
 Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'preservim/nerdtree'
 Plug 'mattn/emmet-vim'
+Plug 'preservim/nerdtree'
+Plug 'vifm/vifm.vim'
+
+" Wiki
+Plug 'vimwiki/vimwiki'
 
 call plug#end()
 
