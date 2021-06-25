@@ -58,11 +58,9 @@ keys = [Key(key[0], key[1], *key[2:]) for key in [
     ([mod], "b", lazy.spawn("firefox")),
 
     # File Explorer
-    # ([mod], "e", lazy.spawn("pcmanfm")),
     # ([mod], "e", lazy.spawn("thunar")),
-    # ([mod], "e", lazy.spawn("alacritty -e vifm")),
-    ([mod], "e", lazy.spawn("alacritty -e ranger")),
-    # ([mod], "e", lazy.spawn("xfce4-terminal -e vifm")),
+    ([mod], "e", lazy.spawn("alacritty -e vifm")),
+    # ([mod], "e", lazy.spawn("alacritty -e ranger")),
 
     # Terminal
     ([mod], "Return", lazy.spawn("alacritty")),
