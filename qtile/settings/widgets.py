@@ -94,7 +94,6 @@ primary_widgets = [
     powerline('dark', 'color1'),
 
     widget.KeyboardLayout(configured_keyboards=['latam', 'us dvp']),
-
     widget.CurrentLayoutIcon(**base(bg='dark'), scale=0.65),
     widget.Systray(background=colors['dark'], padding=5),
 ]
