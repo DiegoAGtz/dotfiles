@@ -93,7 +93,7 @@ primary_widgets = [
     widget.Clock(**base(bg='color1'), format='%d/%m/%Y - %H:%M '),
     powerline('dark', 'color1'),
 
-    widget.KeyboardLayout(configured_keyboards=['latam', 'us dvp']),
+    widget.KeyboardLayout(configured_keyboards=['us dvorak', 'latam', 'us dvp']),
     widget.CurrentLayoutIcon(**base(bg='dark'), scale=0.65),
     widget.Systray(background=colors['dark'], padding=5),
 ]
