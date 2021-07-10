@@ -51,3 +51,4 @@ source $HOME/.config/nvim/config/vim-airline.vim
 source $HOME/.config/nvim/config/coc.vim
 source $HOME/.config/nvim/config/nerdtree.vim
 source $HOME/.config/nvim/config/emmet.vim
+source $HOME/.config/nvim/config/vimwiki.vim
