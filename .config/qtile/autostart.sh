@@ -1,7 +1,11 @@
 #!/bin/sh
 
 # Compositor
-# picom &
+picom &
+nm-applet &
+udiskie -t &
+volumeicon &
+cbatticon &
 
 # Wallpaper
 # feh --bg-scale ~/Imágenes/fondos/paisaje.jpg &
@@ -11,6 +15,6 @@
 # systray volume
 # volumeicon &
 
-xfce4-clipman &
+# xfce4-clipman &
 # telegram-desktop &
-megasync &
+# megasync &

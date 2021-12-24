@@ -55,7 +55,7 @@ keys = [Key(key[0], key[1], *key[2:]) for key in [
     ([mod, "shift"], "m", lazy.spawn("rofi -show")),
 
     # dmenu 
-    ([mod], "d", lazy.spawn("dmenu_run")),
+    ([mod], "p", lazy.spawn("dmenu_run")),
 
     # passmenu
     ([mod,"shift"], "d", lazy.spawn("passmenu")),
@@ -65,9 +65,7 @@ keys = [Key(key[0], key[1], *key[2:]) for key in [
     # ([mod], "b", lazy.spawn("brave")),
 
     # File Explorer
-    ([mod], "e", lazy.spawn("thunar")),
-    # ([mod], "e", lazy.spawn("alacritty -e vifm")),
-    # ([mod], "e", lazy.spawn("alacritty -e ranger")),
+    ([mod], "e", lazy.spawn("pcmanfm Images/screenshots")),
 
     # Terminal
     ([mod], "Return", lazy.spawn("alacritty")),
@@ -78,13 +76,17 @@ keys = [Key(key[0], key[1], *key[2:]) for key in [
     # ([mod, "shift"], "r", lazy.spawn("redshift -x")),
 
     # Screenshot
-    ([mod], "s", lazy.spawn("scrot")),
+    ([mod], "s", lazy.spawn("scrot Images/screenshots/%Y-%m-%d-%T-screenshot.png")),
+    ([mod, "shift"], "s", lazy.spawn("scrot -s Images/screenshots/%Y-%m-%d-%T-screenshot.png")),
 
     # Telegram
     ([mod], "t", lazy.spawn("telegram-desktop")),
 
     # EmacsClient
     ([mod], "o", lazy.spawn("emacsclient -c -a 'emacs'")),
+
+    # ScreenSaver
+    ([mod, "control"], "z", lazy.spawn("slock")),
 
     # ------------ Hardware Configs ------------
 
@@ -99,12 +101,7 @@ keys = [Key(key[0], key[1], *key[2:]) for key in [
         "pactl set-sink-mute @DEFAULT_SINK@ toggle"
     )),
 
-    # ImpPant
-    ([mod], "p", lazy.spawn("xfce4-screenshooter -fd 1")),
-    ([mod, "shift"], "p", lazy.spawn("xfce4-screenshooter -r")),
-    ([mod, "mod1"], "p", lazy.spawn("xfce4-screenshooter -w")),
-
     # Brightness
-    ([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set +10%")),
-    ([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 10%-")),
+    ([mod, "control"], "m", lazy.spawn("brightnessctl set +10%")),
+    ([mod, "control"], "n", lazy.spawn("brightnessctl set 10%-")),
 ]]

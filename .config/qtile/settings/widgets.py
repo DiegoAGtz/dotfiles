@@ -81,7 +81,8 @@ primary_widgets = [
     powerline('color2', 'color4'),
 
     # icon(bg="color3", text=' '),  # Icon: nf-fa-feed
-    widget.Net(**base(bg='color2')),
+    widget.Net(**base(bg='color2'), interface='wlo1'),
+    widget.Battery(**base(bg='color2')),
     # icon(bg="color3", text=' '),
     # widget.Pomodoro(**base(bg='color3', fg='light'), color_inactive='ffffff', color_active='ffffff', color_break='ffffff'),
     powerline('color3', 'color2'),
@@ -93,7 +94,7 @@ primary_widgets = [
     widget.Clock(**base(bg='color1'), format='%d/%m/%Y - %H:%M '),
     powerline('dark', 'color1'),
 
-    widget.KeyboardLayout(configured_keyboards=['us dvorak', 'latam', 'us dvp']),
+    widget.KeyboardLayout(configured_keyboards=['latam', 'us dvorak', 'us dvp']),
     widget.CurrentLayoutIcon(**base(bg='dark'), scale=0.65),
     widget.Systray(background=colors['dark'], padding=5),
 ]

@@ -1,5 +1,5 @@
 # Path to your oh-my-bash installation.
-export OSH=/home/diego/.oh-my-bash
+# export OSH=/home/diego/.oh-my-bash
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-bash is loaded.
@@ -70,7 +70,7 @@ plugins=(
   bashmarks
 )
 
-source $OSH/oh-my-bash.sh
+# source $OSH/oh-my-bash.sh
 
 # User configuration
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -111,6 +111,6 @@ export PAGER=more
 if [ -n "$RANGER_LEVEL" ]; then export PS1="[ranger]$PS1"; fi
 
 eval "$(starship init bash)"
-source /home/diego/.config/broot/launcher/bash/br
+# source /home/diego/.config/broot/launcher/bash/br
 
 alias config='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME'
