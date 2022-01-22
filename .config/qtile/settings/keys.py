@@ -65,7 +65,7 @@ keys = [Key(key[0], key[1], *key[2:]) for key in [
     # ([mod], "b", lazy.spawn("brave")),
 
     # File Explorer
-    ([mod], "e", lazy.spawn("pcmanfm Images/screenshots")),
+    ([mod], "e", lazy.spawn("pcmanfm")),
 
     # Terminal
     ([mod], "Return", lazy.spawn("alacritty")),
@@ -76,8 +76,8 @@ keys = [Key(key[0], key[1], *key[2:]) for key in [
     # ([mod, "shift"], "r", lazy.spawn("redshift -x")),
 
     # Screenshot
-    ([mod], "s", lazy.spawn("scrot Images/screenshots/%Y-%m-%d-%T-screenshot.png")),
-    ([mod, "shift"], "s", lazy.spawn("scrot -s Images/screenshots/%Y-%m-%d-%T-screenshot.png")),
+    ([mod], "s", lazy.spawn("scrot Pictures/screenshots/%Y-%m-%d-%T-screenshot.png")),
+    ([mod, "shift"], "s", lazy.spawn("scrot -s Pictures/screenshots/%Y-%m-%d-%T-screenshot.png")),
 
     # Telegram
     ([mod], "t", lazy.spawn("telegram-desktop")),

@@ -1,20 +1,22 @@
 #!/bin/sh
 
+# Brightness
+brightnessctl -r &
+
+# Polkit
+lxqt-policykit-agent &
+
 # Compositor
 picom &
+
+# Systray
+cbatticon &
+volumeicon &
 nm-applet &
 udiskie -t &
-volumeicon &
-cbatticon &
 
 # Wallpaper
-# feh --bg-scale ~/Imágenes/fondos/paisaje.jpg &
+feh --bg-scale -z ~/Pictures/wallpapers/ &
 
-# systray battery icon
-# cbatticon -u 5 &
-# systray volume
-# volumeicon &
-
-# xfce4-clipman &
-# telegram-desktop &
-# megasync &
+# emacs daemon
+emacs --daemon &

@@ -65,12 +65,12 @@ def workspaces():
 primary_widgets = [
     *workspaces(),
     separator(),
-    powerline('color4', 'dark'),
+    # powerline('color4', 'dark'),
 
 
-    icon(bg="color4", text=' '), # Icon: nf-fa-download
+    icon(bg="dark", text=' '), # Icon: nf-fa-download
     widget.CheckUpdates(
-        background=colors['color4'],
+        # background=colors['color4'],
         colour_have_updates=colors['text'],
         colour_no_updates=colors['text'],
         no_update_string='0',
@@ -78,21 +78,27 @@ primary_widgets = [
         update_interval=1800,
         custom_command='checkupdates',
     ),
-    powerline('color2', 'color4'),
+
+    widget.TextBox(
+        fontsize=37,
+        padding=-6
+    ),
+
+    # powerline('color2', 'color4'),
 
     # icon(bg="color3", text=' '),  # Icon: nf-fa-feed
-    widget.Net(**base(bg='color2'), interface='wlo1'),
-    widget.Battery(**base(bg='color2')),
+    # widget.Net(**base(bg='color2'), interface='wlo1'),
+    # widget.Battery(**base(bg='color2')),
     # icon(bg="color3", text=' '),
     # widget.Pomodoro(**base(bg='color3', fg='light'), color_inactive='ffffff', color_active='ffffff', color_break='ffffff'),
-    powerline('color3', 'color2'),
+    # powerline('color3', 'color2'),
 
-    icon(bg="color3", text='墳 ', fg='dark'), 
-    widget.Volume(**base(bg='color3', fg='dark')),
-    powerline('color1', 'color3'),
-    icon(bg="color1", fontsize=17, text=' '), # Icon: nf-mdi-calendar_clock
+    # icon(bg="color3", text='墳 ', fg='dark'), 
+    # widget.Volume(**base(bg='color3', fg='dark'), volume_app="pamixer"),
+    # powerline('color1', 'color3'),
+    icon(bg="dark", fontsize=17, text=' '), # Icon: nf-mdi-calendar_clock
     widget.Clock(**base(bg='color1'), format='%d/%m/%Y - %H:%M '),
-    powerline('dark', 'color1'),
+    # powerline('dark', 'color1'),
 
     widget.KeyboardLayout(configured_keyboards=['latam', 'us dvorak', 'us dvp']),
     widget.CurrentLayoutIcon(**base(bg='dark'), scale=0.65),
