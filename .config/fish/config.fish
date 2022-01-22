@@ -12,3 +12,7 @@ colorscript random
 starship init fish | source
 
 alias config='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME'
+alias ls='exa'
+alias l='exa'
+alias ll='exa -l'
+alias la='exa -la'
