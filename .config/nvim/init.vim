@@ -1,3 +1,6 @@
+set hidden
+set nobackup
+set nowritebackup
 set nocompatible
 set number
 set relativenumber
@@ -28,26 +31,12 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
 
 " Icons
-Plug 'preservim/nerdtree' |
-            \ Plug 'Xuyuanp/nerdtree-git-plugin' |
-            \ Plug 'ryanoasis/vim-devicons'
+Plug 'ryanoasis/vim-devicons'
 
 " IDE
+Plug 'preservim/nerdtree'
 Plug 'easymotion/vim-easymotion'
-Plug 'sheerun/vim-polyglot'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'mattn/emmet-vim'
-Plug 'vifm/vifm.vim'
-Plug 'jiangmiao/auto-pairs'
-Plug 'airblade/vim-gitgutter'
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'npm install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
-Plug 'tpope/vim-fugitive'
 Plug 'junegunn/fzf.vim'
-
-" Wiki
-Plug 'vimwiki/vimwiki'
 
 call plug#end()
 
@@ -56,7 +45,4 @@ colorscheme dracula
 " configs
 source $HOME/.config/nvim/config/maps.vim
 source $HOME/.config/nvim/config/vim-airline.vim
-source $HOME/.config/nvim/config/coc.vim
 source $HOME/.config/nvim/config/nerdtree.vim
-source $HOME/.config/nvim/config/emmet.vim
-source $HOME/.config/nvim/config/vimwiki.vim
