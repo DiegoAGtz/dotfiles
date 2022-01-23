@@ -56,6 +56,6 @@
 (setq doom-font (font-spec :family "UbuntuMono Nerd Font" :size 17)
       doom-variable-pitch-font (font-spec :family "UbuntuMono Nerd Font" :size 13))
 
-(setq doom-theme 'doom-palenight)
+(setq doom-theme 'doom-dracula)
 
 (setq confirm-kill-emacs nil)
