@@ -11,7 +11,11 @@ colorscript random
 ### SETTING THE STARSHIP PROMPT ###
 starship init fish | source
 
+set GOPATH ~/go
+fish_add_path $GOPATH/bin
+
 alias config='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME'
+alias doom='~/.emacs.d/bin/doom'
 alias ls='exa'
 alias l='exa'
 alias ll='exa -l'
