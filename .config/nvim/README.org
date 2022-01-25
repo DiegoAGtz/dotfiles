@@ -1,3 +1,18 @@
+#+TITLE: Neovim Configuration
+#+AUTHOR: DiegoAGtz
+#+PROPERTY: header-args :tangle init.vim
+#+DESCRIPTION: This is a neovim configuration org file
+
+* TABLE OF CONTENTS :toc:
+- [[#global-settings][GLOBAL SETTINGS]]
+- [[#plugins][PLUGINS]]
+- [[#colors][COLORS]]
+- [[#nerdtree][NERDTREE]]
+- [[#key-bindings][KEY BINDINGS]]
+
+* GLOBAL SETTINGS
+
+#+BEGIN_SRC vim
 set nocompatible
 set number
 set relativenumber
@@ -19,7 +34,11 @@ set clipboard=unnamedplus
 set splitright
 set splitbelow
 set noshowmode
+#+END_SRC
 
+* PLUGINS
+
+#+BEGIN_SRC vim
 call plug#begin('~/.config/nvim/Plugged')
 
 Plug 'dracula/vim', {'as': 'dracula'}
@@ -31,7 +50,11 @@ Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/fzf.vim'
 
 call plug#end()
+#+END_SRC
 
+* COLORS
+
+#+BEGIN_SRC vim
 colorscheme dracula
 
 let g_airline_theme='Dracula'
@@ -39,7 +62,11 @@ let g:airline_powerline_fonts = 1
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
+#+END_SRC
 
+* NERDTREE
+
+#+BEGIN_SRC vim
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let NERDTreeQuitOnOpen = 1
@@ -58,7 +85,11 @@ autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_
     \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
 
 autocmd BufReadPre,FileReadPre * :NERDTreeClose
+#+END_SRC
 
+* KEY BINDINGS
+
+#+BEGIN_SRC vim
 let mapleader=" "
 
 nmap <Leader>s <Plug>(easymotion-s2)
@@ -77,3 +108,4 @@ imap jj <Esc>
 " Mirror the NERDTree before showing it. This makes it the same on all tabs.
 nnoremap <Leader>f :NERDTreeMirror<CR>:NERDTreeFocus<CR>
 nnoremap <silent> <Leader>v :NERDTreeFind<CR>
+#+END_SRC
