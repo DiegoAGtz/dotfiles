@@ -1,3 +1,5 @@
+set noswapfile
+set nobackup
 set nocompatible
 set number
 set relativenumber
