@@ -1,27 +1,54 @@
-export PATH=~/.emacs.d/bin:$PATH
-export PATH=~/.local/bin:$PATH
-
-# VI bash mode 
+# VI bash mode and completion
 set -o vi
+bind -m vi-command 'Control-l: clear-screen'
+bind -m vi-insert 'Control-l: clear-screen'
+bind "set completion-ignore-case on"
 
-# Exports for ranger, terminal file manager
-export EDITOR=vim
-export VISUAL=vim
+### Exports for editors and man pages reader
 
-# GOPATH
-export GOPATH=$HOME/go
-export PATH="$GOPATH/bin:$PATH"
+export EDITOR=nvim
+export VISUAL="emacsclient -c -a emacs"
 
-# Composer
-export PATH=$HOME/.config/composer/vendor/bin:$PATH
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+### Aliases
 
 alias config='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME'
-# config config --local status.showUntrackedFines no
 
-alias ls='exa'
-alias l='exa'
-alias ll='exa -l'
-alias la='exa -la'
+alias ls='exa -al --color=always --group-directories-first'
+alias la='exa -a --color=always --group-directories-first' 
+alias ll='exa -l --color=always --group-directories-first' 
+alias lt='exa -aT --color=always --group-directories-first'
+alias l.='exa -a | egrep "^\."'
+
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+
+alias cp="cp -i"
+alias mv='mv -i'
+alias rm='rm -i'
+
+### PATH
+
+if [ -d "$HOME/go" ]; then
+    export GOPATH=$HOME/go
+    export PATH="$GOPATH/bin:$PATH"
+fi
+
+if [ -d "$HOME/.emacs.d/bin:$PATH" ]; then
+    export PATH="$HOME/.emacs.d/bin:$PATH"
+fi
+
+if [ -d "$HOME/.local/bin" ]; then
+    export PATH=~/.local/bin:$PATH
+fi
+
+if [ -d "$HOME/.config/composer" ]; then
+    export PATH=$HOME/.config/composer/vendor/bin:$PATH
+fi
+
+### Start
 
 colorscript random
 eval "$(starship init bash)"
