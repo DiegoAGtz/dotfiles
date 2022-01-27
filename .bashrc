@@ -14,6 +14,7 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 ### Aliases
 
 alias config='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME'
+alias doom='~/.emacs.d/bin/doom'
 
 alias ls='exa -al --color=always --group-directories-first'
 alias la='exa -a --color=always --group-directories-first' 
@@ -34,10 +35,6 @@ alias rm='rm -i'
 if [ -d "$HOME/go" ]; then
     export GOPATH=$HOME/go
     export PATH="$GOPATH/bin:$PATH"
-fi
-
-if [ -d "$HOME/.emacs.d/bin:$PATH" ]; then
-    export PATH="$HOME/.emacs.d/bin:$PATH"
 fi
 
 if [ -d "$HOME/.local/bin" ]; then
