@@ -49,6 +49,6 @@ if [ -d "$HOME/.config/composer" ]; then
 fi
 
 ### Start
-
+fish
 colorscript random
 eval "$(starship init bash)"
