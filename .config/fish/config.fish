@@ -14,7 +14,7 @@ set fish_color_error '#ff6c6b'
 set fish_color_param brcyan
 
 ### Aliases
-alias config='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME'
+alias config='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 alias doom='~/.emacs.d/bin/doom'
 
 alias ls='exa -al --color=always --group-directories-first'
