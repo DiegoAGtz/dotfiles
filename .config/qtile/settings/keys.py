@@ -55,10 +55,10 @@ keys = [Key(key[0], key[1], *key[2:]) for key in [
     ([mod, "shift"], "m", lazy.spawn("rofi -show")),
 
     # dmenu 
-    ([mod], "p", lazy.spawn("dmenu_run")),
+    ([mod], "p", lazy.spawn("dmenu_run -h 24")),
 
     # passmenu
-    ([mod,"shift"], "d", lazy.spawn("passmenu")),
+    ([mod,"shift"], "p", lazy.spawn("passmenu -h 24")),
 
     # Browser
     ([mod], "b", lazy.spawn("firefox")),
