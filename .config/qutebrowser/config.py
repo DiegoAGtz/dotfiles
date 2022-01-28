@@ -136,19 +136,7 @@ c.content.blocking.method = 'adblock'
 # extracting it from the `location` parameter of the subscribe URL and
 # URL-decoding it).
 # Type: List of Url
-c.content.blocking.adblock.lists = [
-    'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters.txt',
-    'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/badware.txt',
-    'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/privacy.txt',
-    'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/resource-abuse.txt',
-    'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/unbreak.txt',
-    'https://easylist.to/easylist/easylist.txt',
-    'https://easylist.to/easylist/easyprivacy.txt',
-    'https://curben.gitlab.io/malware-filter/urlhaus-filter-online.txt',
-    'https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=1&mimetype=plaintext',
-    'https://filters.adtidy.org/extension/ublock/filters/9.txt',
-    'https://easylist-downloads.adblockplus.org/easylistspanish.txt'
-]
+c.content.blocking.adblock.lists = ['https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters.txt', 'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/badware.txt', 'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/privacy.txt', 'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/resource-abuse.txt', 'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/unbreak.txt', 'https://easylist.to/easylist/easylist.txt', 'https://easylist.to/easylist/easyprivacy.txt', 'https://curben.gitlab.io/malware-filter/urlhaus-filter-online.txt', 'https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=1&mimetype=plaintext', 'https://filters.adtidy.org/extension/ublock/filters/9.txt', 'https://easylist-downloads.adblockplus.org/easylistspanish.txt']
 
 # Load images automatically in web pages.
 # Type: Bool
@@ -219,7 +207,7 @@ c.tabs.show = 'never'
 # Page to open if :open -t/-b/-w is used without URL. Use `about:blank`
 # for a blank page.
 # Type: FuzzyUrl
-c.url.default_page = '~/index.html'
+c.url.default_page = 'http://localhost/'
 
 # Search engines which can be used via the address bar.  Maps a search
 # engine name (such as `DEFAULT`, or `ddg`) to a URL with a `{}`
@@ -240,7 +228,7 @@ c.url.default_page = '~/index.html'
 # the search engine name to the search term, e.g. `:open google
 # qutebrowser`.
 # Type: Dict
-c.url.searchengines = {'DEFAULT': 'https://www.google.com/search?q={}'}
+c.url.searchengines = {'DEFAULT': 'https://search.brave.com/search?q={}'}
 
 # Page(s) to open at the start.
 # Type: List of FuzzyUrl, or FuzzyUrl
