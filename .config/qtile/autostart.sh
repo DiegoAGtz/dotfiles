@@ -13,6 +13,7 @@ picom &
 cbatticon &
 volumeicon &
 nm-applet &
+blueman-applet &
 udiskie -t &
 
 # Wallpaper
