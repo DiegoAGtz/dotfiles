@@ -233,3 +233,6 @@ c.url.searchengines = {'DEFAULT': 'https://search.brave.com/search?q={}'}
 # Page(s) to open at the start.
 # Type: List of FuzzyUrl, or FuzzyUrl
 c.url.start_pages = '~/index.html'
+
+# Theme
+config.source('themes/dracula.py')
