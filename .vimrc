@@ -5,7 +5,6 @@ set number
 set relativenumber
 set numberwidth=1
 set mouse=a
-syntax enable
 set showcmd
 set ruler
 set encoding=utf-8
@@ -21,3 +20,7 @@ set clipboard=unnamedplus
 set splitright
 set splitbelow
 set noshowmode
+
+packadd! dracula
+syntax enable
+colorscheme dracula
