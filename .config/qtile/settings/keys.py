@@ -102,6 +102,6 @@ keys = [Key(key[0], key[1], *key[2:]) for key in [
     )),
 
     # Brightness
-    ([mod, "control"], "m", lazy.spawn("brightnessctl set +10%")),
-    ([mod, "control"], "n", lazy.spawn("brightnessctl set 10%-")),
+    ([mod, "control"], "m", lazy.spawn("brightnessctl set +1%")),
+    ([mod, "control"], "n", lazy.spawn("brightnessctl set 1%-")),
 ]]
