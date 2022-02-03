@@ -8,7 +8,7 @@ from settings.theme import colors
 layout_conf = {
     'border_focus': colors['focus'][0],
     'border_width': 1,
-    'margin': 5
+    'margin': 2
 }
 
 layouts = [
@@ -28,12 +28,8 @@ layouts = [
 floating_layout = layout.Floating(
     float_rules=[
         *layout.Floating.default_float_rules,
-        Match(wm_class='confirmreset'),
-        Match(wm_class='makebranch'),
-        Match(wm_class='maketag'),
-        Match(wm_class='ssh-askpass'),
-        Match(title='branchdialog'),
-        Match(title='pinentry'),
+        Match(wm_class='megasync'),
+        Match(title='galculator'),
     ],
     border_focus=colors["color4"][0]
 )
