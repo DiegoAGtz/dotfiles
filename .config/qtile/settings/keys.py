@@ -60,24 +60,33 @@ keys = [Key(key[0], key[1], *key[2:]) for key in [
     # passmenu
     ([mod,"shift"], "p", lazy.spawn("passmenu -h 24")),
 
+    # dm-maim
+    ([mod], "s", lazy.spawn("dm-maim")),
+
+    # dm-confedit
+    ([mod], "c", lazy.spawn("dm-confedit")),
+
+    # dm-logout
+    ([mod, "shift"], "q", lazy.spawn("dm-logout")),
+
+    # dm-note
+    ([mod], "n", lazy.spawn("dm-note")),
+
     # Browser
-    ([mod], "b", lazy.spawn("firefox")),
-    # ([mod], "b", lazy.spawn("brave")),
+    ([mod], "b", lazy.spawn("brave")),
+
+    # dm-websearch
+    ([mod, "shift"], "b", lazy.spawn("dm-websearch")),
 
     # File Explorer
     ([mod], "e", lazy.spawn("pcmanfm")),
 
     # Terminal
     ([mod], "Return", lazy.spawn("alacritty")),
-    # ([mod], "Return", lazy.spawn("xfce4-terminal")),
 
     # Redshift
-    # ([mod], "r", lazy.spawn("redshift -O 4400")),
-    # ([mod, "shift"], "r", lazy.spawn("redshift -x")),
-
-    # Screenshot
-    ([mod], "s", lazy.spawn("scrot Pictures/screenshots/%Y-%m-%d-%T-screenshot.png")),
-    ([mod, "shift"], "s", lazy.spawn("scrot -s Pictures/screenshots/%Y-%m-%d-%T-screenshot.png")),
+    ([mod], "r", lazy.spawn("redshift -O 4400")),
+    ([mod, "shift"], "r", lazy.spawn("redshift -x")),
 
     # Telegram
     ([mod], "t", lazy.spawn("telegram-desktop")),
@@ -87,6 +96,9 @@ keys = [Key(key[0], key[1], *key[2:]) for key in [
 
     # ScreenSaver
     ([mod, "control"], "z", lazy.spawn("slock")),
+
+    # Process Dashboard
+    ([mod, "control"], "p", lazy.spawn("java -jar ProcessDashboard/pspdash.jar")),
 
     # ------------ Hardware Configs ------------
 

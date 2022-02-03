@@ -16,7 +16,7 @@ nm-applet &
 udiskie -t &
 
 # Wallpaper
-feh --bg-scale -z ~/Pictures/wallpapers/ &
+feh --bg-scale -z ~/Pictures/Wallpapers/ &
 
 # emacs daemon
 emacs --daemon &
