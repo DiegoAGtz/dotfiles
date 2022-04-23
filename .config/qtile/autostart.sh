@@ -14,6 +14,7 @@ cbatticon &
 volumeicon &
 nm-applet &
 udiskie -t &
+megasync &
 
 # Wallpaper
 feh --bg-scale -z ~/Pictures/Wallpapers/ &

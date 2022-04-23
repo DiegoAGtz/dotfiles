@@ -29,6 +29,7 @@ floating_layout = layout.Floating(
     float_rules=[
         *layout.Floating.default_float_rules,
         Match(wm_class='megasync'),
+        Match(wm_class='orage'),
         Match(title='galculator'),
     ],
     border_focus=colors["color4"][0]
