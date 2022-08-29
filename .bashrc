@@ -45,7 +45,11 @@ if [ -d "$HOME/.config/composer" ]; then
     export PATH=$HOME/.config/composer/vendor/bin:$PATH
 fi
 
+if [ -d "$HOME/.flutter/flutter" ]; then
+    export PATH=$HOME/.flutter/flutter/bin:$PATH
+fi
+
 ### Start
-fish
-colorscript random
 eval "$(starship init bash)"
+### fish
+### . "$HOME/.cargo/env"

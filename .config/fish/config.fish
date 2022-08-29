@@ -16,6 +16,9 @@ set fish_color_param brcyan
 ### Aliases
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 alias doom='~/.emacs.d/bin/doom'
+alias dbstart='sudo service mariadb start'
+alias dbstop='sudo service mariadb stop'
+alias lamp='sudo service mariadb start && sudo service apache2 start'
 
 alias ls='exa -al --color=always --group-directories-first'
 alias la='exa -a --color=always --group-directories-first' 
@@ -61,7 +64,12 @@ else
 end
 
 ### Random color script
-colorscript random
+### colorscript random
+
+### Chrome for flutter
+### set -x CHROME_EXECUTABLE /mnt/c/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe
+
+bash "$HOME/.cargo/env"
 
 ### Starship prompt
 starship init fish | source

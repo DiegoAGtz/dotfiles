@@ -1,3 +1,6 @@
+#+title: README
+#+author: DiegoAGtz
+
 * DOTFILES
 
 Dotfiles for GNU/Linux

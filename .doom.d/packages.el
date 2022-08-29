@@ -48,3 +48,12 @@
 ;(unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
+
+(when (package! restclient)
+  (package! ob-restclient))
+(package! pacmacs)
+(package! 2048-game)
+(package! gameoflife )
+(package! minesweeper)
+(when (package! org-ref)
+  (package! org-ref-prettify))

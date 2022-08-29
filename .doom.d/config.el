@@ -3,6 +3,7 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
+;; (toggle-frame-maximized)
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
@@ -29,7 +30,29 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+(map! :leader
+      :desc "Org babel tangle" "m B" #'org-babel-tangle)
+(after! org
+  (setq org-directory "~/org/"
+        org-agenda-files '("~/org/agenda.org")
+        org-default-notes-file (expand-file-name "notes.org" org-directory)
+        org-ellipsis " ▼ "
+        org-superstar-headline-bullets-list '("◉" "●" "○" "◆" "●" "○" "◆")
+        org-superstar-itembullet-alist '((?+ . ?➤) (?- . ?✦)) ; changes +/- symbols in item lists
+        org-log-done 'time
+        org-hide-emphasis-markers t
+        org-table-convert-region-max-lines 20000))
+                                        ; org-todo-keywords        ; This overwrites the default Doom org-todo-keywords
+                                        ; '((sequence
+                                        ;    "TODO(t)"           ; A task that is ready to be tackled
+                                        ;    "BLOG(b)"           ; Blog writing assignments
+                                        ;    "GYM(g)"            ; Things to accomplish at the gym
+                                        ;    "PROJ(p)"           ; A project that contains other tasks
+                                        ;    "VIDEO(v)"          ; Video assignments
+                                        ;    "WAIT(w)"           ; Something is holding up this task
+                                        ;    "|"                 ; The pipe necessary to separate "active" states and "inactive" states
+                                        ;    "DONE(d)"           ; Task has been completed
+                                        ;    "CANCELLED(c)" )))) ; Task has been cancelled
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -49,13 +72,50 @@
 ;; To get information about any of these functions/macros, move the cursor over
 ;; the highlighted symbol at press 'K' (non-evil users must press 'C-c c k').
 ;; This will open documentation for it, including demos of how they are used.
-;t;
+;;
+
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-(setq doom-font (font-spec :family "UbuntuMono Nerd Font" :size 17)
-      doom-variable-pitch-font (font-spec :family "UbuntuMono Nerd Font" :size 13))
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 17)
+      doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 15)
+      doom-big-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 24))
+(after! doom-themes
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t))
+(custom-set-faces!
+  '(font-lock-comment-face :slant italic)
+  '(font-lock-keyword-face :slant italic))
 
-(setq doom-theme 'doom-dracula)
+(setq doom-theme 'doom-one)
 
-(setq confirm-kill-emacs nil)
+(setq centaur-tabs-set-bar 'over
+      centaur-tabs-set-icons t
+      centaur-tabs-gray-out-icons 'buffer
+      centaur-tabs-height 24
+      centaur-tabs-set-modified-marker t
+      centaur-tabs-style "bar"
+      centaur-tabs-modified-marker "•")
+(map! :leader
+      :desc "Toggle tabs globally" "t c" #'centaur-tabs-mode
+      :desc "Toggle tabs local display" "t C" #'centaur-tabs-local-mode)
+(evil-define-key 'normal centaur-tabs-mode-map
+  (kbd "g <right>") 'centaur-tabs-forward        ; default Doom binding is 'g t'
+  (kbd "g <left>")  'centaur-tabs-backward       ; default Doom binding is 'g T'
+  (kbd "g <down>")  'centaur-tabs-forward-group
+  (kbd "g <up>")    'centaur-tabs-backward-group)
+
+;; This setting ensures that emacsclient always opens on dashboard rather than scratch.
+;; (setq initial-buffer-choice (lambda () (get-buffer "*doom*")))
+
+;; LaTeX classes
+;; (add-to-list 'org-latex-classes
+;;              '("IEEEtran"
+;;                "\\documentclass[conference]{IEEEtran}"))
+
+(setq flutter-sdk-path "~/.flutter/flutter/bin/flutter") ;;Path to your dart-sdk
+
+(setq org-latex-compilers '("latexmk" "pdflatex" "xelatex" "lualatex"))
+
+(require 'ox-extra)
+(ox-extras-activate '(ignore-headlines))
