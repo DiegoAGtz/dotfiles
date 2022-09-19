@@ -236,3 +236,7 @@ c.url.start_pages = '~/index.html'
 
 # Theme
 config.source('themes/dracula.py')
+
+colors.webpage.darkmode =  True
+
+colors.webpage.bg = 'dark'

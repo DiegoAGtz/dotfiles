@@ -6,6 +6,10 @@
  '(custom-safe-themes
    '("835868dcd17131ba8b9619d14c67c127aa18b90a82438c8613586331129dda63" "234dbb732ef054b109a9e5ee5b499632c63cc24f7c2383a849815dacc1727cb6" default))
  '(doom-themes-treemacs-theme "doom-colors")
+ '(flycheck-golangci-lint-enable-all nil)
+ '(flycheck-golangci-lint-executable "/home/ag/go/bin/golangci-lint")
+ '(flycheck-golangci-lint-fast t)
+ '(flycheck-golangci-lint-tests t)
  '(ignored-local-variable-values
    '((eval add-to-list 'org-export-before-processing-hook
            (lambda
