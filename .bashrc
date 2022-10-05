@@ -10,6 +10,8 @@ export EDITOR=nvim
 export VISUAL="emacsclient -c -a emacs"
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export DENO_INSTALL="/home/ag/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
 
 ### Aliases
 
