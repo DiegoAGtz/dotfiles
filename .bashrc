@@ -51,5 +51,5 @@ fi
 
 ### Start
 eval "$(starship init bash)"
-### fish
+fish
 ### . "$HOME/.cargo/env"

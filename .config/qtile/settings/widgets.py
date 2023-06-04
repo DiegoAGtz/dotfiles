@@ -89,14 +89,14 @@ primary_widgets = [
     # icon(bg="color3", text=' '),  # Icon: nf-fa-feed
     # widget.Net(**base(bg='color2'), interface='wlo1'),
     # widget.Battery(**base(bg='color2')),
-    # icon(bg="color3", text=' '),
-    # widget.Pomodoro(**base(bg='color3', fg='light'), color_inactive='ffffff', color_active='ffffff', color_break='ffffff'),
-    # powerline('color3', 'color2'),
+    icon(bg="dark", text='  '),
+    widget.Pomodoro(**base(bg='dark', fg='light'), color_inactive='ffffff', color_active='ffffff', color_break='ffffff'),
+    icon(bg="dark", text=' '),
 
     # icon(bg="color3", text='墳 ', fg='dark'), 
     # widget.Volume(**base(bg='color3', fg='dark'), volume_app="pamixer"),
     # powerline('color1', 'color3'),
-    icon(bg="dark", fontsize=17, text=' '), # Icon: nf-mdi-calendar_clock
+    icon(bg="dark", fontsize=17, text='󰃰 '), # Icon: nf-mdi-calendar_clock
     widget.Clock(**base(bg='color1'), format='%d/%m/%Y - %H:%M '),
     # powerline('dark', 'color1'),
 

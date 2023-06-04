@@ -18,7 +18,7 @@ set fish_color_param brcyan
 
 ### Aliases
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
-alias doom='~/.emacs.d/bin/doom'
+alias doom='~/.config/emacs/bin/doom'
 alias dbstart='sudo service mariadb start'
 alias dbstop='sudo service mariadb stop'
 alias lamp='sudo service mariadb start && sudo service apache2 start'
