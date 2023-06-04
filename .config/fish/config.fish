@@ -3,6 +3,7 @@ set fish_greeting
 
 ### GOPATH
 set -x GOPATH $HOME/go
+set -x DENO_INSTALL $HOME/.deno
 
 ### Vi mode
 function fish_user_key_bindings
