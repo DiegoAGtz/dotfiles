@@ -125,7 +125,7 @@ config.set('content.headers.user_agent', 'Mozilla/5.0 ({os_info}) AppleWebKit/53
 #   - adblock: Use Brave's ABP-style adblocker
 #   - hosts: Use hosts blocking
 #   - both: Use both hosts blocking and Brave's ABP-style adblocker
-c.content.blocking.method = 'adblock'
+c.content.blocking.method = 'both'
 
 # List of URLs to ABP-style adblocking rulesets.  Only used when Brave's
 # ABP-style adblocker is used (see `content.blocking.method`).  You can
@@ -136,7 +136,7 @@ c.content.blocking.method = 'adblock'
 # extracting it from the `location` parameter of the subscribe URL and
 # URL-decoding it).
 # Type: List of Url
-c.content.blocking.adblock.lists = ['https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters.txt', 'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/badware.txt', 'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/privacy.txt', 'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/resource-abuse.txt', 'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/unbreak.txt', 'https://easylist.to/easylist/easylist.txt', 'https://easylist.to/easylist/easyprivacy.txt', 'https://curben.gitlab.io/malware-filter/urlhaus-filter-online.txt', 'https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=1&mimetype=plaintext', 'https://filters.adtidy.org/extension/ublock/filters/9.txt', 'https://easylist-downloads.adblockplus.org/easylistspanish.txt']
+# c.content.blocking.adblock.lists = ['https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters.txt', 'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/badware.txt', 'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/privacy.txt', 'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/resource-abuse.txt', 'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/unbreak.txt', 'https://easylist.to/easylist/easylist.txt', 'https://easylist.to/easylist/easyprivacy.txt', 'https://curben.gitlab.io/malware-filter/urlhaus-filter-online.txt', 'https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=1&mimetype=plaintext', 'https://filters.adtidy.org/extension/ublock/filters/9.txt', 'https://easylist-downloads.adblockplus.org/easylistspanish.txt']
 
 # Load images automatically in web pages.
 # Type: Bool
@@ -235,8 +235,8 @@ c.url.searchengines = {'DEFAULT': 'https://search.brave.com/search?q={}'}
 c.url.start_pages = '~/index.html'
 
 # Theme
-config.source('themes/dracula.py')
+config.source('./themes/onedark.py')
 
-colors.webpage.darkmode =  True
+# colors.webpage.darkmode =  True
 
-colors.webpage.bg = 'dark'
+# colors.webpage.bg = 'dark'

@@ -49,11 +49,10 @@
     </head>
     <body>
         <div class="flex-container">
-            <form method="GET" id="search" action="https://search.brave.com/search">
-                <input type="text" name="q" autofocus class="text-field" />
+            <form method="GET" id="search" action="javascript: sendRequest()">
+                <input type="text" id="s" name="q" autofocus class="text-field" />
             </form>
         </div>
-
         <div class="flex-container">
             <div class="flex-table">
                 <a href="https://wiki.archlinux.org/">Arch Wiki</a>
@@ -68,5 +67,11 @@
                 <a href="http://localhost/">Localhost</a>
             </div>
         </div>
+        <script type="text/javascript">
+         function sendRequest() {
+             const query =document.getElementById('s').value;
+             window.location.href = "https://search.brave.com/search?q=" + query;
+         }
+        </script>
     </body>
 </html>

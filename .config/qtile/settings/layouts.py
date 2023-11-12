@@ -29,6 +29,8 @@ floating_layout = layout.Floating(
     float_rules=[
         *layout.Floating.default_float_rules,
         Match(wm_class='megasync'),
+        Match(wm_class='pinentry-gtk-2'),
+        Match(wm_class='blueman-manager'),
         Match(wm_class='orage'),
         Match(title='galculator'),
     ],

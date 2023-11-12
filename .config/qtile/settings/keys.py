@@ -79,7 +79,7 @@ keys = [Key(key[0], key[1], *key[2:]) for key in [
     ([mod, "shift"], "b", lazy.spawn("dm-websearch")),
 
     # File Explorer
-    ([mod], "e", lazy.spawn("pcmanfm")),
+    ([mod], "e", lazy.spawn("thunar")),
 
     # Terminal
     ([mod], "Return", lazy.spawn("alacritty")),

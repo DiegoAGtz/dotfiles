@@ -2,22 +2,24 @@
 
 # Brightness
 brightnessctl -r &
+blueman-applet &
 
 # Polkit
-lxqt-policykit-agent &
+# lxqt-policykit-agent &
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 # Compositor
 picom &
 
 # Systray
-cbatticon &
+cbatticon -i notification &
 volumeicon &
 nm-applet &
 udiskie -t &
 megasync &
 
 # Wallpaper
-feh --bg-scale -z ~/Pictures/Wallpapers/ &
+feh --bg-scale -z ~/Pictures/wallpapers/ &
 
 # emacs daemon
 emacs --daemon &

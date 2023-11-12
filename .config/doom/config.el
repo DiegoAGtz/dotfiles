@@ -77,9 +77,9 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-(setq doom-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 17)
-      doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 15)
-      doom-big-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 24))
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 13)
+      doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 11)
+      doom-big-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 18))
 (after! doom-themes
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
