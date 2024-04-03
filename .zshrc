@@ -225,7 +225,7 @@ alias psgrep="ps aux | grep -v grep | grep -i -e VSZ -e"
 alias update-grub="sudo grub-mkconfig -o /boot/grub/grub.cfg"
 alias grub-update="sudo grub-mkconfig -o /boot/grub/grub.cfg"
 #grub issue 08/2022
-alias install-grub-efi="sudo grub-install --target=x86_64-efi --efi-directory=/boot/efi"
+alias install-grub-efi="sudo grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=ArcoLinux"
 
 #add new fonts
 alias update-fc='sudo fc-cache -fv'
@@ -246,7 +246,9 @@ alias tobash="sudo chsh $USER -s /bin/bash && echo 'Now log out.'"
 alias tozsh="sudo chsh $USER -s /bin/zsh && echo 'Now log out.'"
 alias tofish="sudo chsh $USER -s /bin/fish && echo 'Now log out.'"
 
-#switch between lightdm and sddm
+#switch between displaymanager or bootsystem
+alias toboot="sudo /usr/local/bin/arcolinux-toboot"
+alias togrub="sudo /usr/local/bin/arcolinux-togrub"
 alias tolightdm="sudo pacman -S lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings --noconfirm --needed ; sudo systemctl enable lightdm.service -f ; echo 'Lightm is active - reboot now'"
 alias tosddm="sudo pacman -S sddm --noconfirm --needed ; sudo systemctl enable sddm.service -f ; echo 'Sddm is active - reboot now'"
 alias toly="sudo pacman -S ly --noconfirm --needed ; sudo systemctl enable ly.service -f ; echo 'Ly is active - reboot now'"
@@ -367,6 +369,10 @@ alias nz="$EDITOR ~/.zshrc"
 alias nf="$EDITOR ~/.config/fish/config.fish"
 alias nneofetch="$EDITOR ~/.config/neofetch/config.conf"
 alias nplymouth="sudo $EDITOR /etc/plymouth/plymouthd.conf"
+alias nvconsole="sudo $EDITOR /etc/vconsole.conf"
+alias nenvironment="sudo $EDITOR /etc/environment"
+alias nloader="sudo $EDITOR /boot/efi/loader/loader.conf"
+
 
 #reading logs with bat
 alias lcalamares="bat /var/log/Calamares.log"
@@ -421,6 +427,13 @@ alias bls="betterlockscreen -u /usr/share/backgrounds/arcolinux/"
 #give the list of all installed desktops - xsessions desktops
 alias xd="ls /usr/share/xsessions"
 alias xdw="ls /usr/share/wayland-sessions"
+
+#give a list of the kernels installed
+alias kernel="ls /usr/lib/modules"
+alias kernels="ls /usr/lib/modules"
+
+#am I on grub or systemd-boot
+alias boot="sudo bootctl status | grep Product"
 
 # # ex = EXtractor for all kinds of archives
 # # usage: ex <file>
@@ -500,7 +513,7 @@ alias personal='cp -Rf /personal/* ~'
 [[ -f ~/.zshrc-personal ]] && . ~/.zshrc-personal
 
 # reporting tools - install when not installed
-neofetch
+#neofetch
 #screenfetch
 #alsi
 #paleofetch
@@ -514,3 +527,4 @@ neofetch
 #sysinfo-retro
 #cpufetch
 #colorscript random
+#hyfetch
