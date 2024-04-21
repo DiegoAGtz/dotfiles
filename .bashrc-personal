@@ -33,6 +33,7 @@ alias t="typioca"
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
+alias dbstart='sudo systemctl start mariadb'
 
 alias v='fd --type f --hidden --exclude .git | fzf-tmux -p --reverse | xargs nvim'
 
@@ -40,23 +41,21 @@ if command -v wal > /dev/null 2>&1 && [ "$TERM" = "alacritty" ]; then
     wal -Rqe
 fi
 ### PATH
+if [ -d "$HOME/.cargo" ]; then
+    . "$HOME/.cargo/env"
+fi
 if [ -d "$HOME/go" ]; then
     export GOPATH=$HOME/go
     export PATH="$GOPATH/bin:$PATH"
 fi
-
-if [ -d "$HOME/.local/bin" ]; then
-    export PATH=~/.local/bin:$PATH
-fi
-
 if [ -d "$HOME/.config/composer" ]; then
     export PATH=$HOME/.config/composer/vendor/bin:$PATH
 fi
-
 if [ -d "$HOME/.flutter" ]; then
     export PATH=$HOME/.flutter/bin:$PATH
     export CHROME_EXECUTABLE=brave
 fi
+
 ### Start
 eval "$(starship init bash)"
 ### fish

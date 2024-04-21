@@ -107,3 +107,6 @@
 ;; (add-to-list 'load-path ".")
 ;; (require 'ox-extra)
 ;; (ox-extras-activate '(ignore-headlines))
+
+;; Apheleia config
+(apheleia-global-mode +1)

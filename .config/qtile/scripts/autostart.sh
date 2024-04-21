@@ -50,6 +50,9 @@ picom &
 udiskie -t &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 /usr/lib/xfce4/notifyd/xfce4-notifyd &
+#
+# emacs daemon
+emacs --daemon &
 
 #starting user applications at boot time
 run volumeicon &

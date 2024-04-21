@@ -135,10 +135,10 @@ keys = [
     Key([mod], "m", lazy.spawn("rofi -show drun")),
     # Window Nav
     Key([mod, "shift"], "m", lazy.spawn("rofi -show")),
-    # dmenu 
+    # dmenu
     Key([mod], "p", lazy.spawn("dmenu_run -h 24")),
     # passmenu
-    Key([mod,"shift"], "p", lazy.spawn("passmenu -h 24")),
+    Key([mod, "shift"], "p", lazy.spawn("passmenu -h 24")),
     # dm-maim
     Key([mod], "s", lazy.spawn("dm-maim")),
     # dm-confedit
@@ -269,14 +269,14 @@ for i in groups:
             # Key(["mod1"], "Tab", lazy.screen.next_group()),
             # Key(["mod1", "shift"], "Tab", lazy.screen.prev_group()),
             # MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND STAY ON WORKSPACE
-            Key([mod, "shift"], i.name, lazy.window.togroup(i.name)),
+            # Key([mod, "shift"], i.name, lazy.window.togroup(i.name)),
             # MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND FOLLOW MOVED WINDOW TO WORKSPACE
-            # Key(
-            #     [mod, "shift"],
-            #     i.name,
-            #     lazy.window.togroup(i.name),
-            #     lazy.group[i.name].toscreen(),
-            # ),
+            Key(
+                [mod, "shift"],
+                i.name,
+                lazy.window.togroup(i.name),
+                lazy.group[i.name].toscreen(),
+            ),
         ]
     )
 
@@ -366,12 +366,12 @@ def init_widgets_list():
             foreground=colors[5],
             background=colors[1],
         ),
-        widget.CurrentLayout( foreground=colors[5], background=colors[1]),
+        widget.CurrentLayout(foreground=colors[5], background=colors[1]),
         widget.Sep(linewidth=1, padding=10, foreground=colors[2], background=colors[1]),
         widget.KeyboardLayout(
             configured_keyboards=["us", "latam", "us dvp"],
             foreground=colors[5],
-            background=colors[1]
+            background=colors[1],
         ),
         widget.Sep(
             padding=10,
@@ -384,21 +384,16 @@ def init_widgets_list():
             interface="wlp3s0",
             foreground=colors[2],
             background=colors[1],
-            padding = 0,
+            padding=0,
         ),
-        widget.Sep(
-            linewidth = 1,
-            padding = 10,
-            foreground = colors[2],
-            background = colors[1]
-        ),
+        widget.Sep(linewidth=1, padding=10, foreground=colors[2], background=colors[1]),
         widget.ThermalSensor(
-            foreground = colors[5],
-            foreground_alert = colors[6],
-            background = colors[1],
-            metric = True,
-            padding = 3,
-            threshold = 80
+            foreground=colors[5],
+            foreground_alert=colors[6],
+            background=colors[1],
+            metric=True,
+            padding=3,
+            threshold=80,
         ),
         widget.Sep(linewidth=1, padding=10, foreground=colors[2], background=colors[1]),
         widget.Battery(
@@ -414,12 +409,7 @@ def init_widgets_list():
             foreground=colors[5],
             background=colors[1],
         ),
-        widget.Sep(
-            linewidth = 1,
-            padding = 10,
-            foreground = colors[2],
-            background = colors[1]
-        ),
+        widget.Sep(linewidth=1, padding=10, foreground=colors[2], background=colors[1]),
         widget.TextBox(
             font="FontAwesome",
             text="  ",
@@ -434,12 +424,7 @@ def init_widgets_list():
             fontsize=12,
             format="%Y-%m-%d %H:%M",
         ),
-        widget.Sep(
-            linewidth = 1,
-            padding = 10,
-            foreground = colors[2],
-            background = colors[1]
-        ),
+        widget.Sep(linewidth=1, padding=10, foreground=colors[2], background=colors[1]),
         widget.Systray(background=colors[1], icon_size=20, padding=4),
     ]
     return widgets_list
@@ -562,9 +547,9 @@ def start_always():
 @hook.subscribe.client_new
 def set_floating(window):
     if (
-            window.window.get_wm_transient_for()
-            or window.window.get_wm_type() in floating_types
-            ):
+        window.window.get_wm_transient_for()
+        or window.window.get_wm_type() in floating_types
+    ):
         window.floating = True
 
 

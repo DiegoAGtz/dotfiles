@@ -53,3 +53,5 @@
 ;; (package! babel)
 ;; (package! emmet-mode)
 (package! catppuccin-theme)
+(package! prisma-mode :recipe (:host github :repo "pimeys/emacs-prisma-mode" :branch "main"))
+(package! apheleia)

@@ -13,6 +13,9 @@ map("n", "<leader>fb", "<CMD>Telescope wfile_browser<CR>")
 map("n", "<leader>fw", "<CMD>Telescope live_grep<CR>")
 map("n", "<leader>ht", "<CMD>Telescope colorscheme<CR>")
 
+-- Nvim-Tree
+map("n", "<leader>op", "<CMD>NvimTreeToggle<CR>")
+
 -- Better move around
 map("n", "<C-d>", "<C-d>zz", {silent = true, noremap = true})
 map("n", "<C-u>", "<C-u>zz", {silent = true, noremap = true})
