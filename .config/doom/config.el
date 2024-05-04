@@ -55,7 +55,7 @@
 ;;       :desc "Org babel tangle" "m B" #'org-babel-tangle)
 (after! org
   (setq org-directory "~/org/"
-        org-agenda-files '("~/org/agenda.org")
+        org-agenda-files '("~/org/agenda.org" "~/org/todo.org")
         org-default-notes-file (expand-file-name "notes.org" org-directory)
         org-ellipsis " ▼ "
         org-superstar-headline-bullets-list '("◉" "●" "○" "◆" "●" "○" "◆")
