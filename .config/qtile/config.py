@@ -5,7 +5,7 @@ import subprocess
 from typing import List  # noqa: F401
 from libqtile import layout, bar, widget, hook, qtile
 from libqtile.config import Click, Drag, Group, Key, Match, Screen, Rule
-from libqtile.command import lazy
+from libqtile.lazy import lazy
 from libqtile.widget import Spacer
 import arcobattery
 
@@ -57,14 +57,14 @@ keys = [
         lazy.layout.increase_ratio(),
         lazy.layout.delete(),
     ),
-    Key(
-        [mod, "shift"],
-        "Right",
-        lazy.layout.grow_right(),
-        lazy.layout.grow(),
-        lazy.layout.increase_ratio(),
-        lazy.layout.delete(),
-    ),
+    # Key(
+    #     [mod, "shift"],
+    #     "Right",
+    #     lazy.layout.grow_right(),
+    #     lazy.layout.grow(),
+    #     lazy.layout.increase_ratio(),
+    #     lazy.layout.delete(),
+    # ),
     Key(
         [mod, "shift"],
         "h",
@@ -73,14 +73,14 @@ keys = [
         lazy.layout.decrease_ratio(),
         lazy.layout.add(),
     ),
-    Key(
-        [mod, "shift"],
-        "Left",
-        lazy.layout.grow_left(),
-        lazy.layout.shrink(),
-        lazy.layout.decrease_ratio(),
-        lazy.layout.add(),
-    ),
+    # Key(
+    #     [mod, "shift"],
+    #     "Left",
+    #     lazy.layout.grow_left(),
+    #     lazy.layout.shrink(),
+    #     lazy.layout.decrease_ratio(),
+    #     lazy.layout.add(),
+    # ),
     Key(
         [mod, "shift"],
         "k",
@@ -88,13 +88,13 @@ keys = [
         lazy.layout.grow(),
         lazy.layout.decrease_nmaster(),
     ),
-    Key(
-        [mod, "shift"],
-        "Up",
-        lazy.layout.grow_up(),
-        lazy.layout.grow(),
-        lazy.layout.decrease_nmaster(),
-    ),
+    # Key(
+    #     [mod, "shift"],
+    #     "Up",
+    #     lazy.layout.grow_up(),
+    #     lazy.layout.grow(),
+    #     lazy.layout.decrease_nmaster(),
+    # ),
     Key(
         [mod, "shift"],
         "j",
@@ -102,13 +102,13 @@ keys = [
         lazy.layout.shrink(),
         lazy.layout.increase_nmaster(),
     ),
-    Key(
-        [mod, "shift"],
-        "Down",
-        lazy.layout.grow_down(),
-        lazy.layout.shrink(),
-        lazy.layout.increase_nmaster(),
-    ),
+    # Key(
+    #     [mod, "shift"],
+    #     "Down",
+    #     lazy.layout.grow_down(),
+    #     lazy.layout.shrink(),
+    #     lazy.layout.increase_nmaster(),
+    # ),
     # TOGGLE FLOATING LAYOUT
     Key([mod, "shift"], "f", lazy.window.toggle_floating()),
     # FLIP LAYOUT FOR BSP
@@ -155,12 +155,14 @@ keys = [
     # File Explorer
     Key([mod], "e", lazy.spawn("thunar")),
     # Terminal
-    Key([mod], "Return", lazy.spawn("alacritty")),
+    Key([mod], "Return", lazy.spawn("kitty")),
     # Redshift
     Key([mod], "r", lazy.spawn("redshift -O 4400")),
     Key([mod, "shift"], "r", lazy.spawn("redshift -x")),
     # Telegram
     Key([mod], "t", lazy.spawn("telegram-desktop")),
+    # ZapZap
+    Key([mod], "z", lazy.spawn("zapzap")),
     # EmacsClient
     Key([mod], "o", lazy.spawn("emacsclient -c -a 'emacs'")),
     # ScreenSaver
@@ -396,13 +398,13 @@ def init_widgets_list():
             threshold=80,
         ),
         widget.Sep(linewidth=1, padding=10, foreground=colors[2], background=colors[1]),
-        widget.Battery(
-            battery=0,
-            fontsize=12,
-            foreground=colors[5],
-            background=colors[1],
-        ),
-        widget.Sep(linewidth=1, padding=10, foreground=colors[2], background=colors[1]),
+        # widget.Battery(
+        #     battery=0,
+        #     fontsize=12,
+        #     foreground=colors[5],
+        #     background=colors[1],
+        # ),
+        # widget.Sep(linewidth=1, padding=10, foreground=colors[2], background=colors[1]),
         widget.Battery(
             battery=1,
             fontsize=12,

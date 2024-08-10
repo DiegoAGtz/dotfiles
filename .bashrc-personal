@@ -7,12 +7,13 @@ bind "set completion-ignore-case on"
 ### Exports for editors and man pages reader
 export EDITOR=nvim
 export VISUAL="emacsclient -c -a emacs"
+export GO111MODULE=on
 
 export MANROFFOPT="-c"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 export DENO_INSTALL="/home/ag/.deno"
-export PATH="$DENO_INSTALL/bin:$PATH"
+export PATH="$DENO_INSTALL/bin:/usr/bin/flutter/bin:$PATH"
 
 ### Aliases
 

@@ -27,7 +27,7 @@ return {
             ensure_installed = {
                 "lua_ls",
                 "gopls",
-                "htmx",
+--                "htmx",
                 "rust_analyzer",
                 "pyright",
                 "tsserver",

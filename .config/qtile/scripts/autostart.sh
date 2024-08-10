@@ -12,8 +12,9 @@ function run {
 #run $HOME/.config/qtile/scripts/set-screen-resolution-in-virtualbox.sh
 
 #Find out your monitor name with xrandr or arandr (save and you get this line)
-xrandr --output HDMI-2 --primary --mode 1920x1080 --pos 0x0 --rotate normal
-xrandr --output eDP-1 --mode 1920x1080 --pos 1920x0 --rotate normal
+xrandr --output HDMI-2 --primary --mode 1920x1080 --rate 60.00
+xrandr --output eDP-1 --mode 1920x1080 --rate 60.00 --left-of HDMI-2
+#xrandr --output eDP-1 --auto --output HDMI-2 --auto --right-of eDP-1
 
 #xrandr --output VGA-1 --primary --mode 1360x768 --pos 0x0 --rotate normal
 #xrandr --output DP2 --primary --mode 1920x1080 --rate 60.00 --output LVDS1 --off &
@@ -57,3 +58,4 @@ emacs --daemon &
 #starting user applications at boot time
 run volumeicon &
 nitrogen --restore &
+#autorandr --change &
