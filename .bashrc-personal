@@ -1,46 +1,38 @@
-# VI bash mode and completion
+### EXPORT ###
+export TERM="xterm-256color"
+export HISTCONTROL=ignoredups:erasedups
+export EDITOR=nvim
+export VISUAL="emacsclient -c -a emacs"
+export MANPAGER="nvim +Man!"
+
+### VI BASH MODE AND COMPLETION ###
 set -o vi
 bind -m vi-command 'Control-l: clear-screen'
 bind -m vi-insert 'Control-l: clear-screen'
 bind "set completion-ignore-case on"
 
-### Exports for editors and man pages reader
-export EDITOR=nvim
-export VISUAL="emacsclient -c -a emacs"
-export GO111MODULE=on
-
-export MANROFFOPT="-c"
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-
-export DENO_INSTALL="/home/ag/.deno"
-export PATH="$DENO_INSTALL/bin:/usr/bin/flutter/bin:$PATH"
-
-### Aliases
+### ALIASES ###
+alias ..='cd ..'
+alias ...='cd ../..'
+alias .3='cd ../../..'
+alias .4='cd ../../../..'
+alias .5='cd ../../../../..'
 
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 alias doom='~/.config/emacs/bin/doom'
+alias cat='bat'
 
-alias ls='exa -al --color=always --group-directories-first'
-alias la='exa -a --color=always --group-directories-first' 
-alias ll='exa -l --color=always --group-directories-first' 
-alias lt='exa -aT --color=always --group-directories-first'
-alias l.='exa -a | egrep "^\."'
-
-alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
+alias ls='eza -al --color=always --group-directories-first'
+alias la='eza -a --color=always --group-directories-first' 
+alias ll='eza -l --color=always --group-directories-first' 
+alias lt='eza -aT --color=always --group-directories-first'
+alias l.='eza -al --color=always --group-directories-first ../'
+alias l..='eza -al --color=always --group-directories-first ../../'
+alias l...='eza -al --color=always --group-directories-first ../../../'
 
 alias t="typioca"
-alias cp='cp -i'
-alias mv='mv -i'
-alias rm='rm -i'
-alias dbstart='sudo systemctl start mariadb'
-
 alias v='fd --type f --hidden --exclude .git | fzf-tmux -p --reverse | xargs nvim'
 
-if command -v wal > /dev/null 2>&1 && [ "$TERM" = "alacritty" ]; then
-    wal -Rqe
-fi
 ### PATH
 if [ -d "$HOME/.cargo" ]; then
     . "$HOME/.cargo/env"
@@ -56,8 +48,14 @@ if [ -d "$HOME/.flutter" ]; then
     export PATH=$HOME/.flutter/bin:$PATH
     export CHROME_EXECUTABLE=brave
 fi
+if [ -d "$HOME/.deno" ]; then
+    export DENO_INSTALL="/home/ag/.deno"
+    export PATH="$DENO_INSTALL/bin:/usr/bin/flutter/bin:$PATH"
+fi
+if [ -f /usr/share/nvm/init-nvm.sh ]; then
+    source /usr/share/nvm/init-nvm.sh
+    export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+fi
 
-### Start
 eval "$(starship init bash)"
-### fish
-### . "$HOME/.cargo/env"

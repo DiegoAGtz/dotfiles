@@ -109,4 +109,4 @@
 ;; (ox-extras-activate '(ignore-headlines))
 
 ;; Apheleia config
-(apheleia-global-mode +1)
+;; (apheleia-global-mode +1)

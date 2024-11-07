@@ -338,7 +338,7 @@ def init_widgets_defaults():
 widget_defaults = init_widgets_defaults()
 
 
-def init_widgets_list():
+def init_widgets_list(withTray):
     prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
     widgets_list = [
         widget.GroupBox(
@@ -426,22 +426,24 @@ def init_widgets_list():
             fontsize=12,
             format="%Y-%m-%d %H:%M",
         ),
-        widget.Sep(linewidth=1, padding=10, foreground=colors[2], background=colors[1]),
-        widget.Systray(background=colors[1], icon_size=20, padding=4),
     ]
+    if withTray: 
+        widgets_list.append(widget.Sep(linewidth=1, padding=10, foreground=colors[2], background=colors[1]))
+        widgets_list.append(widget.Systray(background=colors[1], icon_size=20, padding=4))
+
     return widgets_list
 
 
-widgets_list = init_widgets_list()
+widgets_list = init_widgets_list(True)
 
 
 def init_widgets_screen1():
-    widgets_screen1 = init_widgets_list()
+    widgets_screen1 = init_widgets_list(True)
     return widgets_screen1
 
 
 def init_widgets_screen2():
-    widgets_screen2 = init_widgets_list()
+    widgets_screen2 = init_widgets_list(False)
     return widgets_screen2
 
 

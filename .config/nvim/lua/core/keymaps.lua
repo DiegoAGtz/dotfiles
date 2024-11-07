@@ -11,13 +11,13 @@ map("n", "<leader>fr", "<CMD>Telescope oldfiles<CR>")
 map("n", "<leader>ff", "<CMD>Telescope find_files<CR>")
 map("n", "<leader>fb", "<CMD>Telescope wfile_browser<CR>")
 map("n", "<leader>fw", "<CMD>Telescope live_grep<CR>")
-map("n", "<leader>ht", "<CMD>Telescope colorscheme<CR>")
+map("n", "<leader>fc", "<CMD>Telescope colorscheme<CR>")
 
 -- Nvim-Tree
 map("n", "<leader>op", "<CMD>NvimTreeToggle<CR>")
 
 -- Better move around
-map("n", "<C-d>", "<C-d>zz", {silent = true, noremap = true})
-map("n", "<C-u>", "<C-u>zz", {silent = true, noremap = true})
-map("n", "n", "nzzzv", {silent = true, noremap = true})
-map("n", "N", "Nzzzv", {silent = true, noremap = true})
+map("n", "<C-d>", "<C-d>zz")
+map("n", "<C-u>", "<C-u>zz")
+map("n", "n", "nzzzv")
+map("n", "N", "Nzzzv")

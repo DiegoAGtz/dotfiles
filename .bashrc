@@ -1,21 +1,5 @@
-### EXPORT ###
-export EDITOR='nano'
-export VISUAL='nano'
-export HISTCONTROL=ignoreboth:erasedups
-export PAGER='most'
-
-#Ibus settings if you need them
-#type ibus-setup in terminal to change settings and start the daemon
-#delete the hashtags of the next lines and restart
-#export GTK_IM_MODULE=ibus
-#export XMODIFIERS=@im=dbus
-#export QT_IM_MODULE=ibus
-
-PS1='[\u@\h \W]\$ '
-
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
-
 
 if [ -d "$HOME/.bin" ] ;
   then PATH="$HOME/.bin:$PATH"
@@ -25,19 +9,7 @@ if [ -d "$HOME/.local/bin" ] ;
   then PATH="$HOME/.local/bin:$PATH"
 fi
 
-#ignore upper and lowercase when TAB completion
-bind "set completion-ignore-case on"
-
 ### ALIASES ###
-
-#list
-alias ls='ls --color=auto'
-alias la='ls -a'
-alias ll='ls -alFh'
-alias l='ls'
-alias l.="ls -A | egrep '^\.'"
-alias listdir="ls -d */ > list"
-
 #pacman
 alias sps='sudo pacman -S'
 alias spr='sudo pacman -R'
@@ -50,35 +22,11 @@ alias spsii='sudo pacman -Sii'
 function_depends()  {
     search=$(echo "$1")
     sudo pacman -Sii $search | grep "Required" | sed -e "s/Required By     : //g" | sed -e "s/  /\n/g"
-    }
-
+}
 alias depends='function_depends'
-
-#fix obvious typo's
-alias cd..='cd ..'
-alias pdw='pwd'
-alias udpate='sudo pacman -Syyu'
-alias upate='sudo pacman -Syyu'
-alias updte='sudo pacman -Syyu'
-alias updqte='sudo pacman -Syyu'
-alias upqll='paru -Syu --noconfirm'
-alias upal='paru -Syu --noconfirm'
-
-## Colorize the grep command output for ease of use (good for log files)##
-alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
 
 #readable output
 alias df='df -h'
-
-#keyboard
-alias give-me-azerty-be="sudo localectl set-x11-keymap be"
-alias give-me-qwerty-us="sudo localectl set-x11-keymap us"
-
-#setlocale
-alias setlocale="sudo localectl set-locale LANG=en_US.UTF-8"
-alias setlocales="sudo localectl set-x11-keymap be && sudo localectl set-locale LANG=en_US.UTF-8"
 
 #pacman unlock
 alias unlock="sudo rm /var/lib/pacman/db.lck"
@@ -152,10 +100,6 @@ alias togdm="sudo pacman -S gdm --noconfirm --needed ; sudo systemctl enable gdm
 alias tolxdm="sudo pacman -S lxdm --noconfirm --needed ; sudo systemctl enable lxdm.service -f ; echo 'Lxdm is active - reboot now'"
 
 # kill commands
-# quickly kill conkies
-alias kc='killall conky'
-# quickly kill polybar
-alias kp='killall polybar'
 # quickly kill picom
 alias kpi='killall picom'
 
@@ -186,14 +130,6 @@ alias mirrorx="sudo reflector --age 6 --latest 20  --fastest 20 --threads 5 --so
 alias mirrorxx="sudo reflector --age 6 --latest 20  --fastest 20 --threads 20 --sort rate --protocol https --save /etc/pacman.d/mirrorlist"
 alias ram='rate-mirrors --allow-root --disable-comments arch | sudo tee /etc/pacman.d/mirrorlist'
 alias rams='rate-mirrors --allow-root --disable-comments --protocol https arch  | sudo tee /etc/pacman.d/mirrorlist'
-
-#mounting the folder Public for exchange between host and guest on virtualbox
-alias vbm="sudo /usr/local/bin/arcolinux-vbox-share"
-
-#enabling vmware services
-alias start-vmware="sudo systemctl enable --now vmtoolsd.service"
-alias vmware-start="sudo systemctl enable --now vmtoolsd.service"
-alias sv="sudo systemctl enable --now vmtoolsd.service"
 
 #shopt
 shopt -s autocd # change to named directory
@@ -241,34 +177,32 @@ alias rg="rg --sort path"
 #get the error messages from journalctl
 alias jctl="journalctl -p 3 -xb"
 
-#nano for important configuration files
 #know what you do in these files
-alias nlxdm="sudo $EDITOR /etc/lxdm/lxdm.conf"
-alias nlightdm="sudo $EDITOR /etc/lightdm/lightdm.conf"
-alias npacman="sudo $EDITOR /etc/pacman.conf"
-alias ngrub="sudo $EDITOR /etc/default/grub"
-alias nconfgrub="sudo $EDITOR /boot/grub/grub.cfg"
-alias nmkinitcpio="sudo $EDITOR /etc/mkinitcpio.conf"
-alias nmirrorlist="sudo $EDITOR /etc/pacman.d/mirrorlist"
-alias narcomirrorlist="sudo $EDITOR /etc/pacman.d/arcolinux-mirrorlist"
-alias nsddm="sudo $EDITOR /etc/sddm.conf"
-alias nsddmk="sudo $EDITOR /etc/sddm.conf.d/kde_settings.conf"
-alias nfstab="sudo $EDITOR /etc/fstab"
-alias nnsswitch="sudo $EDITOR /etc/nsswitch.conf"
-alias nsamba="sudo $EDITOR /etc/samba/smb.conf"
-alias ngnupgconf="sudo $EDITOR /etc/pacman.d/gnupg/gpg.conf"
-alias nhosts="sudo $EDITOR /etc/hosts"
-alias nhostname="sudo $EDITOR /etc/hostname"
-alias nresolv="sudo $EDITOR /etc/resolv.conf"
-alias nb="$EDITOR ~/.bashrc"
-alias nz="$EDITOR ~/.zshrc"
-alias nf="$EDITOR ~/.config/fish/config.fish"
-alias nneofetch="$EDITOR ~/.config/neofetch/config.conf"
-alias nplymouth="sudo $EDITOR /etc/plymouth/plymouthd.conf"
-alias nvconsole="sudo $EDITOR /etc/vconsole.conf"
-alias nenvironment="sudo $EDITOR /etc/environment"
-alias nloader="sudo $EDITOR /boot/efi/loader/loader.conf"
-
+alias vlxdm="sudo $EDITOR /etc/lxdm/lxdm.conf"
+alias vlightdm="sudo $EDITOR /etc/lightdm/lightdm.conf"
+alias vpacman="sudo $EDITOR /etc/pacman.conf"
+alias vgrub="sudo $EDITOR /etc/default/grub"
+alias vconfgrub="sudo $EDITOR /boot/grub/grub.cfg"
+alias vmkinitcpio="sudo $EDITOR /etc/mkinitcpio.conf"
+alias vmirrorlist="sudo $EDITOR /etc/pacman.d/mirrorlist"
+alias varcomirrorlist="sudo $EDITOR /etc/pacman.d/arcolinux-mirrorlist"
+alias vsddm="sudo $EDITOR /etc/sddm.conf"
+alias vsddmk="sudo $EDITOR /etc/sddm.conf.d/kde_settings.conf"
+alias vfstab="sudo $EDITOR /etc/fstab"
+alias vnsswitch="sudo $EDITOR /etc/nsswitch.conf"
+alias vsamba="sudo $EDITOR /etc/samba/smb.conf"
+alias vgnupgconf="sudo $EDITOR /etc/pacman.d/gnupg/gpg.conf"
+alias vhosts="sudo $EDITOR /etc/hosts"
+alias vhostname="sudo $EDITOR /etc/hostname"
+alias vresolv="sudo $EDITOR /etc/resolv.conf"
+alias vb="$EDITOR ~/.bashrc"
+alias vz="$EDITOR ~/.zshrc"
+alias vf="$EDITOR ~/.config/fish/config.fish"
+alias vneofetch="$EDITOR ~/.config/neofetch/config.conf"
+alias vplymouth="sudo $EDITOR /etc/plymouth/plymouthd.conf"
+alias vvconsole="sudo $EDITOR /etc/vconsole.conf"
+alias venvironment="sudo $EDITOR /etc/environment"
+alias vloader="sudo $EDITOR /boot/efi/loader/loader.conf"
 
 #reading logs with bat
 alias lcalamares="bat /var/log/Calamares.log"
