@@ -32,6 +32,7 @@ alias l...='eza -al --color=always --group-directories-first ../../../'
 
 alias t="typioca"
 alias v='fd --type f --hidden --exclude .git | fzf-tmux -p --reverse | xargs nvim'
+alias kubectl="minikube kubectl --"
 
 ### PATH
 if [ -d "$HOME/.cargo" ]; then
@@ -57,5 +58,14 @@ if [ -f /usr/share/nvm/init-nvm.sh ]; then
     export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 fi
+
+# pnpm
+export PNPM_HOME="/home/diegoagtz/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+alias pn=pnpm
+# pnpm end
 
 eval "$(starship init bash)"

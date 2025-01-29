@@ -21,3 +21,7 @@ map("n", "<C-d>", "<C-d>zz")
 map("n", "<C-u>", "<C-u>zz")
 map("n", "n", "nzzzv")
 map("n", "N", "Nzzzv")
+
+map("n", '<leader><leader>x', "<CMD>source %<CR>")
+map("n", '<leader>x', ":.lua<CR>")
+map("v", '<leader>x', ":lua<cr>")

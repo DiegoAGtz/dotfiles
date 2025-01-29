@@ -52,6 +52,12 @@ o.history = 50
 o.splitright = true
 o.splitbelow = true
 
+-- Folding
+o.foldcolumn = '1'
+o.foldlevel = 99
+o.foldlevelstart = 99
+o.foldenable = true
+
 -- Mouse
 opt.mouse = "a"
 

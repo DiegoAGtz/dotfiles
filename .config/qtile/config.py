@@ -1,20 +1,14 @@
 import os
-import re
 import socket
 import subprocess
-from typing import List  # noqa: F401
 from libqtile import layout, bar, widget, hook, qtile
-from libqtile.config import Click, Drag, Group, Key, Match, Screen, Rule
+from libqtile.config import Drag, Group, Key, KeyChord, Match, Screen
 from libqtile.lazy import lazy
-from libqtile.widget import Spacer
-import arcobattery
 
-# mod4 or mod = super key
 mod = "mod4"
 mod1 = "alt"
 mod2 = "control"
 home = os.path.expanduser("~")
-
 
 @lazy.function
 def window_to_prev_group(qtile):
@@ -31,24 +25,15 @@ def window_to_next_group(qtile):
 
 
 keys = [
-    # SUPER + FUNCTION KEYS
     Key([mod], "f", lazy.window.toggle_fullscreen()),
     Key([mod], "w", lazy.window.kill()),
-    # SUPER + SHIFT KEYS
     Key([mod, "control"], "r", lazy.restart()),
-    # QTILE LAYOUT KEYS
     Key([mod], "Tab", lazy.next_layout()),
     Key([mod, "shift"], "Tab", lazy.prev_layout()),
-    # CHANGE FOCUS
-    Key([mod], "Up", lazy.layout.up()),
-    Key([mod], "Down", lazy.layout.down()),
-    Key([mod], "Left", lazy.layout.left()),
-    Key([mod], "Right", lazy.layout.right()),
     Key([mod], "k", lazy.layout.up()),
     Key([mod], "j", lazy.layout.down()),
     Key([mod], "h", lazy.layout.left()),
     Key([mod], "l", lazy.layout.right()),
-    # RESIZE UP, DOWN, LEFT, RIGHT
     Key(
         [mod, "shift"],
         "l",
@@ -57,14 +42,6 @@ keys = [
         lazy.layout.increase_ratio(),
         lazy.layout.delete(),
     ),
-    # Key(
-    #     [mod, "shift"],
-    #     "Right",
-    #     lazy.layout.grow_right(),
-    #     lazy.layout.grow(),
-    #     lazy.layout.increase_ratio(),
-    #     lazy.layout.delete(),
-    # ),
     Key(
         [mod, "shift"],
         "h",
@@ -73,14 +50,6 @@ keys = [
         lazy.layout.decrease_ratio(),
         lazy.layout.add(),
     ),
-    # Key(
-    #     [mod, "shift"],
-    #     "Left",
-    #     lazy.layout.grow_left(),
-    #     lazy.layout.shrink(),
-    #     lazy.layout.decrease_ratio(),
-    #     lazy.layout.add(),
-    # ),
     Key(
         [mod, "shift"],
         "k",
@@ -88,13 +57,6 @@ keys = [
         lazy.layout.grow(),
         lazy.layout.decrease_nmaster(),
     ),
-    # Key(
-    #     [mod, "shift"],
-    #     "Up",
-    #     lazy.layout.grow_up(),
-    #     lazy.layout.grow(),
-    #     lazy.layout.decrease_nmaster(),
-    # ),
     Key(
         [mod, "shift"],
         "j",
@@ -102,14 +64,6 @@ keys = [
         lazy.layout.shrink(),
         lazy.layout.increase_nmaster(),
     ),
-    # Key(
-    #     [mod, "shift"],
-    #     "Down",
-    #     lazy.layout.grow_down(),
-    #     lazy.layout.shrink(),
-    #     lazy.layout.increase_nmaster(),
-    # ),
-    # TOGGLE FLOATING LAYOUT
     Key([mod, "shift"], "f", lazy.window.toggle_floating()),
     # FLIP LAYOUT FOR BSP
     Key([mod, "mod1"], "k", lazy.layout.flip_up()),
@@ -131,42 +85,34 @@ keys = [
     Key([mod], "comma", lazy.prev_screen()),
     # Switch keyboard layout
     Key([mod], "space", lazy.widget["keyboardlayout"].next_keyboard()),
-    # Menu
-    Key([mod], "m", lazy.spawn("rofi -show drun")),
-    # Window Nav
-    Key([mod, "shift"], "m", lazy.spawn("rofi -show")),
-    # dmenu
-    Key([mod], "p", lazy.spawn("dmenu_run -h 24")),
-    # passmenu
-    Key([mod, "shift"], "p", lazy.spawn("passmenu -h 24")),
-    # dm-maim
-    Key([mod], "s", lazy.spawn("dm-maim")),
-    # dm-confedit
-    Key([mod], "c", lazy.spawn("dm-confedit")),
-    # dm-logout
-    Key([mod, "shift"], "q", lazy.spawn("dm-logout")),
-    Key([mod, "shift"], "w", lazy.spawn("arcolinux-powermenu")),
-    # dm-note
-    Key([mod], "n", lazy.spawn("dm-note")),
-    # Browser
-    Key([mod], "b", lazy.spawn("brave")),
-    # dm-websearch
-    Key([mod, "shift"], "b", lazy.spawn("dm-websearch")),
+
     # File Explorer
-    Key([mod], "e", lazy.spawn("thunar")),
-    # Terminal
+    Key([mod], "e", lazy.spawn("pcmanfm")),
     Key([mod], "Return", lazy.spawn("kitty")),
-    # Redshift
-    Key([mod], "r", lazy.spawn("redshift -O 4400")),
-    Key([mod, "shift"], "r", lazy.spawn("redshift -x")),
-    # Telegram
     Key([mod], "t", lazy.spawn("telegram-desktop")),
-    # ZapZap
     Key([mod], "z", lazy.spawn("zapzap")),
-    # EmacsClient
     Key([mod], "o", lazy.spawn("emacsclient -c -a 'emacs'")),
-    # ScreenSaver
-    Key([mod, "control"], "z", lazy.spawn("slock")),
+
+    Key([mod], "b", lazy.spawn("brave")),
+    KeyChord([mod, "shift"], "b", [
+        Key([], "b", lazy.spawn("brave")),
+        Key([], "q", lazy.spawn("qutebrowser")),
+        Key([], "f", lazy.spawn("firefox"))
+    ]),
+    Key([mod], "r", lazy.spawn("dmenu_run -h 24")),
+    KeyChord([mod, "shift"], "r", [
+        Key([], "f", lazy.spawn("dmenu_run -h 24")),
+        Key([], "p", lazy.spawn("passmenu -h 24")),
+        Key([], "n", lazy.spawn("dm-note")),
+        Key([], "b", lazy.spawn("dm-websearch")),
+        Key([], "s", lazy.spawn("dm-maim")),
+        Key([], "c", lazy.spawn("dm-confedit")),
+        Key([], "q", lazy.spawn("dm-logout")),
+        Key([], "m", lazy.spawn("rofi -show drun")),
+        Key([], "w", lazy.spawn("arcolinux-powermenu")),
+        Key([], "r", lazy.spawn("redshift -O 4400")),
+        Key(["shift"], "r", lazy.spawn("redshift -x"))
+    ])
 ]
 
 
