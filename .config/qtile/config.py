@@ -112,7 +112,9 @@ keys = [
         Key([], "w", lazy.spawn("arcolinux-powermenu")),
         Key([], "r", lazy.spawn("redshift -O 4400")),
         Key(["shift"], "r", lazy.spawn("redshift -x"))
-    ])
+    ]),
+    Key([mod, "mod1"], "l", lazy.spawn("betterlockscreen -l")),
+    Key([mod, "mod1"], "q", lazy.spawn("dm-logout"))
 ]
 
 
@@ -317,7 +319,7 @@ def init_widgets_list(withTray):
         widget.CurrentLayout(foreground=colors[5], background=colors[1]),
         widget.Sep(linewidth=1, padding=10, foreground=colors[2], background=colors[1]),
         widget.KeyboardLayout(
-            configured_keyboards=["us", "latam", "us dvp"],
+            configured_keyboards=["us", "latam"],
             foreground=colors[5],
             background=colors[1],
         ),

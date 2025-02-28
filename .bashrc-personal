@@ -45,8 +45,8 @@ fi
 if [ -d "$HOME/.config/composer" ]; then
     export PATH=$HOME/.config/composer/vendor/bin:$PATH
 fi
-if [ -d "$HOME/.flutter" ]; then
-    export PATH=$HOME/.flutter/bin:$PATH
+if [ -d "$HOME/.sdk/flutter" ]; then
+    export PATH=$HOME/.sdk/flutter/bin:$PATH
     export CHROME_EXECUTABLE=brave
 fi
 if [ -d "$HOME/.deno" ]; then
