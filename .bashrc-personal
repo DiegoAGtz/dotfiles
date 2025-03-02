@@ -4,6 +4,7 @@ export HISTCONTROL=ignoredups:erasedups
 export EDITOR=nvim
 export VISUAL="emacsclient -c -a emacs"
 export MANPAGER="nvim +Man!"
+export QT_QPA_PLATFORMTHEME="qt6ct"
 
 ### VI BASH MODE AND COMPLETION ###
 set -o vi
@@ -60,7 +61,7 @@ if [ -f /usr/share/nvm/init-nvm.sh ]; then
 fi
 
 # pnpm
-export PNPM_HOME="/home/diegoagtz/.local/share/pnpm"
+export PNPM_HOME="/home/diego/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
