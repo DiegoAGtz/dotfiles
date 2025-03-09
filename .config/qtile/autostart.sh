@@ -10,7 +10,7 @@ run autorandr --change &
 run nm-applet &
 run nitrogen --restore &
 run picom &
-# run blueberry-tray & # bluetooth
+run blueman-applet &
 run udiskie -t &
 run volumeicon &
 run /bin/lxqt-policykit-agent &

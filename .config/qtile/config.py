@@ -1,6 +1,6 @@
 import os
 import subprocess
-from libqtile import bar, layout, qtile, widget, hook
+from libqtile import bar, layout, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen, KeyChord
 from libqtile.lazy import lazy
 
@@ -19,45 +19,55 @@ keys = [
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
     Key(
-        [mod, "shift"], "h",
+        [mod, "control"], "h",
         lazy.layout.shuffle_left(),
         desc="Move window to the left"
     ),
     Key(
-        [mod, "shift"], "l",
+        [mod, "control"], "l",
         lazy.layout.shuffle_right(),
         desc="Move window to the right"
     ),
     Key(
-        [mod, "shift"], "j",
+        [mod, "control"], "j",
         lazy.layout.shuffle_down(),
         desc="Move window down"
     ),
     Key(
-        [mod, "shift"], "k",
+        [mod, "control"], "k",
         lazy.layout.shuffle_up(),
         desc="Move window up"
     ),
     # Grow windows. If current window is on the edge of screen and direction
     # will be to screen edge - window would shrink.
     Key(
-        [mod, "control"], "h",
+        [mod, "shift"], "h",
         lazy.layout.grow_left(),
+        lazy.layout.shrink(),
+        lazy.layout.decrease_ratio(),
+        lazy.layout.add(),
         desc="Grow window to the left"
     ),
     Key(
-        [mod, "control"], "l",
+        [mod, "shift"], "l",
         lazy.layout.grow_right(),
+        lazy.layout.grow(),
+        lazy.layout.increase_ratio(),
+        lazy.layout.delete(),
         desc="Grow window to the right"
     ),
     Key(
-        [mod, "control"], "j",
+        [mod, "shift"], "j",
         lazy.layout.grow_down(),
+        lazy.layout.shrink(),
+        lazy.layout.increase_nmaster(),
         desc="Grow window down"
     ),
     Key(
-        [mod, "control"], "k",
+        [mod, "shift"], "k",
         lazy.layout.grow_up(),
+        lazy.layout.grow(),
+        lazy.layout.decrease_nmaster(),
         desc="Grow window up"
     ),
     Key(
@@ -96,6 +106,7 @@ keys = [
     Key([mod], "o", lazy.spawn("emacsclient -c -a 'emacs'")),
 
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
+    Key([mod], "b", lazy.spawn("brave")),
     KeyChord([mod, "shift"], "b", [
         Key([], "b", lazy.spawn("brave")),
         Key([], "q", lazy.spawn("qutebrowser")),
@@ -115,6 +126,7 @@ keys = [
     Key([mod, "mod1"], "l", lazy.spawn("slock")),
     Key([mod, "mod1"], "q", lazy.spawn("dm-logout"))
 ]
+
 
 def init_catppuccin():
     return {
@@ -172,6 +184,7 @@ def start_once():
     home = os.path.expanduser("~")
     subprocess.call([home + "/.config/qtile/autostart.sh"])
 
+
 for i in groups:
     keys.extend(
         [
@@ -196,6 +209,7 @@ for i in groups:
         ]
     )
 
+
 def init_layout_theme():
     return {
         "margin": 1,
@@ -208,8 +222,9 @@ def init_layout_theme():
 layout_theme = init_layout_theme()
 
 layouts = [
-    layout.MonadTall(**layout_theme),
+    layout.Columns(**layout_theme),
     layout.Max(**layout_theme),
+    # layout.MonadTall(**layout_theme),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
     # layout.Bsp(**layout_theme),
@@ -222,6 +237,62 @@ layouts = [
     # layout.Zoomy(**layout_theme),
 ]
 
+
+def init_widgets_screen1():
+    return {
+        'widgets': [
+            widget.GroupBox(
+                borderwidth=2,
+                this_current_screen_border=catppuccin['sapphire'],
+            ),
+            widget.WindowName(),
+            widget.Systray(),
+            widget.Sep(linewidth=1, padding=10),
+            widget.TextBox(text="", foreground=catppuccin['green'], **text_box_defaults),
+            widget.CurrentLayout(),
+            widget.Sep(linewidth=1, padding=10),
+            widget.TextBox(text="", foreground=catppuccin['red'], **text_box_defaults),
+            widget.KeyboardLayout(configured_keyboards=["us", "latam"]),
+            widget.Sep(linewidth=1, padding=10),
+            widget.TextBox(text="", foreground=catppuccin['pink'], **text_box_defaults),
+            widget.Battery(battery=1, fontsize=12, format="{char} {percent:2.0%}"),
+            widget.Sep(linewidth=1, padding=10),
+            widget.TextBox(text="", foreground=catppuccin['peach'], **text_box_defaults),
+            widget.Clock(format="%Y-%m-%d %H:%M"),
+        ],
+        'size': 24,
+        # border_width=[0, 0, 0, 0],  # Draw top and bottom borders
+        # border_color=["ff00ff", "000000", catppuccin['overlay1'], "000000"]  # Borders are magenta
+    }
+
+
+def init_widgets_screen2():
+    return {
+        'widgets': [
+            widget.GroupBox(
+                borderwidth=2,
+                this_current_screen_border=catppuccin['sapphire'],
+            ),
+            widget.WindowName(),
+            widget.TextBox(text="", foreground=catppuccin['green'], **text_box_defaults),
+            widget.CurrentLayout(),
+            widget.Sep(linewidth=1, padding=10),
+            widget.TextBox(text="", foreground=catppuccin['red'], **text_box_defaults),
+            widget.KeyboardLayout(configured_keyboards=["us", "latam"]),
+            widget.Sep(linewidth=1, padding=10),
+            widget.TextBox(text="", foreground=catppuccin['pink'], **text_box_defaults),
+            widget.Battery(battery=1, fontsize=12, format="{char} {percent:2.0%}"),
+            widget.Sep(linewidth=1, padding=10),
+            widget.TextBox(text="", foreground=catppuccin['peach'], **text_box_defaults),
+            widget.Clock(format="%Y-%m-%d %H:%M"),
+        ],
+        'size': 24,
+        # border_width=[0, 0, 0, 0],  # Draw top and bottom borders
+        # border_color=["ff00ff", "000000", catppuccin['overlay1'], "000000"]  # Borders are magenta
+    }
+
+
+
 widget_defaults = dict(
     font="FontAwesome",
     fontsize=12,
@@ -233,38 +304,13 @@ extension_defaults = widget_defaults.copy()
 text_box_defaults = {'padding': 5, 'fontsize': 14}
 screens = [
     Screen(
-        top=bar.Bar([
-                widget.GroupBox(
-                    borderwidth=2,
-                    this_current_screen_border=catppuccin['sapphire'],
-                ),
-                widget.WindowName(),
-                widget.Systray(),
-                widget.Sep(linewidth=1, padding=10),
-                widget.TextBox(text=" ", foreground=catppuccin['blue'], **text_box_defaults),
-                widget.NetGraph(interface="wlan0", border_width=0, fill_color=catppuccin['blue']),
-                widget.Sep(linewidth=1, padding=10),
-                widget.TextBox(text="", foreground=catppuccin['green'], **text_box_defaults),
-                widget.CurrentLayout(),
-                widget.Sep(linewidth=1, padding=10),
-                widget.TextBox(text="", foreground=catppuccin['red'], **text_box_defaults),
-                widget.KeyboardLayout(configured_keyboards=["us", "latam"]),
-                widget.Sep(linewidth=1, padding=10),
-                widget.TextBox(text="", foreground=catppuccin['pink'], **text_box_defaults),
-                widget.Battery(battery=1, fontsize=12, format="{char} {percent:2.0%}"),
-                widget.Sep(linewidth=1, padding=10),
-                widget.TextBox(text="", foreground=catppuccin['peach'], **text_box_defaults),
-                widget.Clock(format="%Y-%m-%d %H:%M"),
-            ],
-            size=24,
-            # border_width=[0, 0, 0, 0],  # Draw top and bottom borders
-            # border_color=["ff00ff", "000000", catppuccin['overlay1'], "000000"]  # Borders are magenta
-        ),
+        top=bar.Bar(**init_widgets_screen1()),
         # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
         # By default we handle these events delayed to already improve performance, however your system might still be struggling
         # This variable is set to None (no cap) by default, but you can set it to 60 to indicate that you limit it to 60 events per second
         # x11_drag_polling_rate = 60,
     ),
+    Screen(top=bar.Bar(**init_widgets_screen2()))
 ]
 
 # Drag floating layouts.
@@ -288,6 +334,7 @@ floating_layout = layout.Floating(
         Match(wm_class="makebranch"),  # gitk
         Match(wm_class="maketag"),  # gitk
         Match(wm_class="ssh-askpass"),  # ssh-askpass
+        Match(wm_class="pinentry-gtk"),  # ssh-askpass
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
     ]
