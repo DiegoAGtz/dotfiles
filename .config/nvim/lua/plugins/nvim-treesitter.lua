@@ -11,7 +11,6 @@ return {
             indent = { enable = true },
             autopairs = { enable = true },
             autotag = { enable = true },
-
         })
     end
 }
