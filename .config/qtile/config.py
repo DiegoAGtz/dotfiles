@@ -7,6 +7,10 @@ from libqtile.lazy import lazy
 mod = "mod4"
 terminal = "kitty"
 keys = [
+    Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 5%-")),
+    Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set +5%")),
+
+
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
     Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
@@ -160,7 +164,12 @@ def init_catppuccin():
 
 
 def init_widgets_defaults():
-    return dict(font="FiraCode Nerd Font", fontsize=12, padding=2, background=catppuccin['crust'])
+    return dict(
+        font="FiraCode Nerd Font",
+        fontsize=12,
+        padding=2,
+        background=catppuccin['crust']
+    )
 
 
 groups = [
@@ -195,7 +204,7 @@ for i in groups:
                 lazy.group[i.name].toscreen(),
                 desc=f"Switch to group {i.name}",
             ),
-            # mod + shift + group number = switch to & move focused window to group
+            # switch to & move focused window to group
             Key(
                 [mod, "shift"],
                 i.name,
@@ -248,21 +257,43 @@ def init_widgets_screen1():
             widget.WindowName(),
             widget.Systray(),
             widget.Sep(linewidth=1, padding=10),
-            widget.TextBox(text="", foreground=catppuccin['green'], **text_box_defaults),
+            widget.TextBox(
+                text="",
+                foreground=catppuccin['green'],
+                **text_box_defaults
+            ),
             widget.CurrentLayout(),
             widget.Sep(linewidth=1, padding=10),
-            widget.TextBox(text="", foreground=catppuccin['red'], **text_box_defaults),
-            widget.KeyboardLayout(configured_keyboards=["us", "latam"]),
+            widget.TextBox(
+                text="",
+                foreground=catppuccin['red'],
+                **text_box_defaults
+            ),
+            widget.KeyboardLayout(configured_keyboards=[
+                "us",
+                "latam",
+                # "us dvorak"
+            ]),
             widget.Sep(linewidth=1, padding=10),
-            widget.TextBox(text="", foreground=catppuccin['pink'], **text_box_defaults),
-            widget.Battery(battery=1, fontsize=12, format="{char} {percent:2.0%}"),
+            widget.TextBox(
+                text="",
+                foreground=catppuccin['pink'],
+                **text_box_defaults
+            ),
+            widget.Battery(
+                battery=1,
+                fontsize=12,
+                format="{char} {percent:2.0%}"
+            ),
             widget.Sep(linewidth=1, padding=10),
-            widget.TextBox(text="", foreground=catppuccin['peach'], **text_box_defaults),
+            widget.TextBox(
+                text="",
+                foreground=catppuccin['peach'],
+                **text_box_defaults
+            ),
             widget.Clock(format="%Y-%m-%d %H:%M"),
         ],
         'size': 24,
-        # border_width=[0, 0, 0, 0],  # Draw top and bottom borders
-        # border_color=["ff00ff", "000000", catppuccin['overlay1'], "000000"]  # Borders are magenta
     }
 
 
@@ -274,23 +305,40 @@ def init_widgets_screen2():
                 this_current_screen_border=catppuccin['sapphire'],
             ),
             widget.WindowName(),
-            widget.TextBox(text="", foreground=catppuccin['green'], **text_box_defaults),
+            widget.TextBox(
+                text="",
+                foreground=catppuccin['green'],
+                **text_box_defaults
+            ),
             widget.CurrentLayout(),
             widget.Sep(linewidth=1, padding=10),
-            widget.TextBox(text="", foreground=catppuccin['red'], **text_box_defaults),
+            widget.TextBox(
+                text="",
+                foreground=catppuccin['red'],
+                **text_box_defaults
+            ),
             widget.KeyboardLayout(configured_keyboards=["us", "latam"]),
             widget.Sep(linewidth=1, padding=10),
-            widget.TextBox(text="", foreground=catppuccin['pink'], **text_box_defaults),
-            widget.Battery(battery=1, fontsize=12, format="{char} {percent:2.0%}"),
+            widget.TextBox(
+                text="",
+                foreground=catppuccin['pink'],
+                **text_box_defaults
+            ),
+            widget.Battery(
+                battery=1,
+                fontsize=12,
+                format="{char} {percent:2.0%}"
+            ),
             widget.Sep(linewidth=1, padding=10),
-            widget.TextBox(text="", foreground=catppuccin['peach'], **text_box_defaults),
+            widget.TextBox(
+                text="",
+                foreground=catppuccin['peach'],
+                **text_box_defaults
+            ),
             widget.Clock(format="%Y-%m-%d %H:%M"),
         ],
         'size': 24,
-        # border_width=[0, 0, 0, 0],  # Draw top and bottom borders
-        # border_color=["ff00ff", "000000", catppuccin['overlay1'], "000000"]  # Borders are magenta
     }
-
 
 
 widget_defaults = dict(
@@ -305,9 +353,12 @@ text_box_defaults = {'padding': 5, 'fontsize': 14}
 screens = [
     Screen(
         top=bar.Bar(**init_widgets_screen1()),
-        # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
-        # By default we handle these events delayed to already improve performance, however your system might still be struggling
-        # This variable is set to None (no cap) by default, but you can set it to 60 to indicate that you limit it to 60 events per second
+        # You can uncomment this variable if you see that on X11 floating
+        # resize/moving is laggy
+        # By default we handle these events delayed to already improve
+        # performance, however your system might still be struggling
+        # This variable is set to None (no cap) by default, but you can set it
+        # to 60 to indicate that you limit it to 60 events per second
         # x11_drag_polling_rate = 60,
     ),
     Screen(top=bar.Bar(**init_widgets_screen2()))
@@ -315,8 +366,16 @@ screens = [
 
 # Drag floating layouts.
 mouse = [
-    Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
-    Drag([mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
+    Drag(
+        [mod], "Button1",
+        lazy.window.set_position_floating(),
+        start=lazy.window.get_position()
+    ),
+    Drag(
+        [mod], "Button3",
+        lazy.window.set_size_floating(),
+        start=lazy.window.get_size()
+    ),
     Click([mod], "Button2", lazy.window.bring_to_front()),
 ]
 
@@ -328,7 +387,6 @@ floats_kept_above = True
 cursor_warp = False
 floating_layout = layout.Floating(
     float_rules=[
-        # Run the utility of `xprop` to see the wm class and name of an X client.
         *layout.Floating.default_float_rules,
         Match(wm_class="confirmreset"),  # gitk
         Match(wm_class="makebranch"),  # gitk

@@ -1,3 +1,10 @@
+nvim_finder() {
+    selection=$(eval "fd --type f --hidden --exclude .git | fzf-tmux -p --reverse")
+    if [[ ! -z $selection ]]; then
+        nvim $selection
+    fi
+}
+
 ### EXPORT ###
 export TERM="xterm-256color"
 export HISTCONTROL=ignoredups:erasedups
@@ -32,8 +39,9 @@ alias l..='eza -al --color=always --group-directories-first ../../'
 alias l...='eza -al --color=always --group-directories-first ../../../'
 
 alias t="typioca"
-alias v='fd --type f --hidden --exclude .git | fzf-tmux -p --reverse | xargs nvim'
 alias kubectl="minikube kubectl --"
+alias v=nvim_finder
+
 
 ### PATH
 if [ -d "$HOME/.cargo" ]; then

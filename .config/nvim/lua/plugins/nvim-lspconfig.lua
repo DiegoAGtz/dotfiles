@@ -28,7 +28,6 @@ return {
                 "lua_ls",
                 "gopls",
                 "pyright",
-                "tsserver",
                 "angularls",
                 "emmet_language_server",
                 "html",

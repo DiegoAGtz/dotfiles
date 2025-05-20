@@ -3,7 +3,6 @@
 
 ;; To install a package with Doom you must declare them here and run 'doom sync'
 ;; on the command line, then restart Emacs for the changes to take effect -- or
-;; use 'M-x doom/reload'.
 
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
@@ -48,14 +47,3 @@
 ;; (unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;; (unpin! t)
-;; (when (package! org-ref)
-;;   (package! org-ref-prettify))
-;; (package! babel)
-;; (package! emmet-mode)
-(package! catppuccin-theme)
-;; (package! lsp-mode)
-(package! prisma-mode :recipe (:host github :repo "pimeys/emacs-prisma-mode" :branch "main"))
-;; (package! apheleia)
-(after! go-mode
-  (setq flycheck-golangci-lint-command "golangci-lint run --out-format line-number"))
-(package! ox-reveal)

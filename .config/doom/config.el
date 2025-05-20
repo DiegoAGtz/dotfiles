@@ -8,8 +8,6 @@
 ;; clients, file templates and snippets. It is optional.
 ;; (setq user-full-name "John Doe"
 ;;       user-mail-address "john@doe.com")
-(setq user-full-name "DiegoAGtz"
-      user-mail-address "diegogtz1207@gmail.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
@@ -35,34 +33,15 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-one)
-(setq doom-font (font-spec :family "FiraCode Nerd Font" :size 15)
-      doom-variable-pitch-font (font-spec :family "FiraCode Nerd Font" :size 13)
-      doom-big-font (font-spec :family "FiraCode Nerd Font" :size 20))
-(after! doom-themes
-  (setq doom-themes-enable-bold t
-        doom-themes-enable-italic t))
-(custom-set-faces!
-  '(font-lock-comment-face :slant italic)
-  '(font-lock-keyword-face :slant italic))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type 'relative)
+(setq display-line-numbers-type t)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-;; (map! :leader
-;;       :desc "Org babel tangle" "m B" #'org-babel-tangle)
-(after! org
-  (setq org-directory "~/org/"
-        org-agenda-files '("~/org/agenda.org" "~/org/todo.org")
-        org-default-notes-file (expand-file-name "notes.org" org-directory)
-        org-ellipsis " ▼ "
-        org-superstar-headline-bullets-list '("◉" "●" "○" "◆" "●" "○" "◆")
-        org-superstar-itembullet-alist '((?+ . ?➤) (?- . ?✦)) ; changes +/- symbols in item lists
-        org-log-done 'time
-        org-hide-emphasis-markers t
-        org-table-convert-region-max-lines 20000))
+(setq org-directory "~/org/")
+
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
@@ -95,18 +74,3 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
-
-;; This setting ensures that emacsclient always opens on dashboard rather than scratch.
-;; (setq initial-buffer-choice (lambda () (get-buffer "*doom*")))
-
-;; LaTeX classes
-;; (add-to-list 'org-latex-classes
-;;              '("IEEEtran"
-;;                "\\documentclass[conference]{IEEEtran}"))
-;; (setq org-latex-compilers '("latexmk" "pdflatex" "xelatex" "lualatex"))
-;; (add-to-list 'load-path ".")
-;; (require 'ox-extra)
-;; (ox-extras-activate '(ignore-headlines))
-
-;; Apheleia config
-;; (apheleia-global-mode +1)
