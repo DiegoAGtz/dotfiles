@@ -105,19 +105,15 @@ keys = [
     Key([mod], "comma", lazy.prev_screen()),
 
     Key([mod], "e", lazy.spawn("pcmanfm")),
-    Key([mod], "t", lazy.spawn("telegram-desktop")),
+    Key([mod], "t", lazy.spawn("Telegram")),
     Key([mod], "z", lazy.spawn("zapzap")),
     Key([mod], "o", lazy.spawn("emacsclient -c -a 'emacs'")),
 
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
-    Key([mod], "b", lazy.spawn("brave")),
-    KeyChord([mod, "shift"], "b", [
-        Key([], "b", lazy.spawn("brave")),
-        Key([], "q", lazy.spawn("qutebrowser")),
-        Key([], "f", lazy.spawn("firefox"))
-    ]),
+    Key([mod], "b", lazy.spawn("zen-browser")),
     Key([mod], "r", lazy.spawn("dmenu_run -h 24"), desc="Spawn dmenu"),
     KeyChord([mod, "shift"], "r", [
+        Key([], "q", lazy.spawn("dm-logout")),
         Key([], "p", lazy.spawn("passmenu -h 24")),
         Key([], "n", lazy.spawn("dm-note")),
         Key([], "b", lazy.spawn("dm-websearch")),
@@ -179,10 +175,6 @@ groups = [
         Group(name="4"),
         Group(name="5"),
         Group(name="6"),
-        Group(name="7"),
-        Group(name="8"),
-        Group(name="9"),
-        Group(name="0"),
 ]
 catppuccin = init_catppuccin()
 widget_defaults = init_widgets_defaults()

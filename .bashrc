@@ -24,3 +24,6 @@ esac
 # pnpm end
 export PATH="/home/diego/.config/herd-lite/bin:$PATH"
 export PHP_INI_SCAN_DIR="/home/diego/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
+
+# composer
+export PATH="~/.composer/vendor/bin:$PATH"
