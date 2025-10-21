@@ -12,6 +12,7 @@ run nitrogen --restore &
 run picom &
 run blueman-applet &
 run udiskie -t &
-run volumeicon &
+# run volumeicon &
 run /bin/lxqt-policykit-agent &
 run emacs --daemon &
+run pasystray &

@@ -10,6 +10,22 @@ keys = [
     Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 5%-")),
     Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set +5%")),
 
+    Key(
+        [], "XF86AudioRaiseVolume",
+        lazy.spawn("amixer -c 0 -q set Master 2dB+")
+    ),
+    Key(
+        [], "XF86AudioLowerVolume",
+        lazy.spawn("amixer -c 0 -q set Master 2dB-")
+    ),
+    Key(
+        [], "XF86AudioMute",
+        lazy.spawn("amixer -c 0 -q set Master toggle")
+    ),
+
+    # Also allow changing volume the old fashioned way.
+    Key([mod], "equal", lazy.spawn("amixer -c 0 -q set Master 2dB+")),
+    Key([mod], "minus", lazy.spawn("amixer -c 0 -q set Master 2dB-")),
 
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
@@ -266,6 +282,15 @@ def init_widgets_screen1():
                 "latam",
                 # "us dvorak"
             ]),
+            # widget.Sep(linewidth=1, padding=10),
+            # widget.TextBox(
+            #     text=" ",
+            #     foreground=catppuccin['sky'],
+            #     **text_box_defaults
+            # ),
+            # widget.Volume(
+            #     fmt='{}'
+            # ),
             widget.Sep(linewidth=1, padding=10),
             widget.TextBox(
                 text="",
