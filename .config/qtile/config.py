@@ -117,6 +117,7 @@ keys = [
     ),
 
     Key([mod], "space", lazy.widget["keyboardlayout"].next_keyboard()),
+
     Key([mod], "period", lazy.next_screen()),
     Key([mod], "comma", lazy.prev_screen()),
 
@@ -126,7 +127,7 @@ keys = [
     Key([mod], "o", lazy.spawn("emacsclient -c -a 'emacs'")),
 
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
-    Key([mod], "b", lazy.spawn("zen-browser")),
+    Key([mod], "b", lazy.spawn("brave")),
     Key([mod], "r", lazy.spawn("dmenu_run -h 24"), desc="Spawn dmenu"),
     KeyChord([mod, "shift"], "r", [
         Key([], "q", lazy.spawn("dm-logout")),
@@ -282,15 +283,17 @@ def init_widgets_screen1():
                 "latam",
                 # "us dvorak"
             ]),
-            # widget.Sep(linewidth=1, padding=10),
-            # widget.TextBox(
-            #     text=" ",
-            #     foreground=catppuccin['sky'],
-            #     **text_box_defaults
-            # ),
-            # widget.Volume(
-            #     fmt='{}'
-            # ),
+            widget.Sep(linewidth=1, padding=10),
+            widget.TextBox(
+                text="",
+                foreground=catppuccin['pink'],
+                **text_box_defaults
+            ),
+            widget.Battery(
+                battery=0,
+                fontsize=12,
+                format="{char} {percent:2.0%}"
+            ),
             widget.Sep(linewidth=1, padding=10),
             widget.TextBox(
                 text="",
@@ -335,6 +338,17 @@ def init_widgets_screen2():
                 **text_box_defaults
             ),
             widget.KeyboardLayout(configured_keyboards=["us", "latam"]),
+            widget.Sep(linewidth=1, padding=10),
+            widget.TextBox(
+                text="",
+                foreground=catppuccin['pink'],
+                **text_box_defaults
+            ),
+            widget.Battery(
+                battery=0,
+                fontsize=12,
+                format="{char} {percent:2.0%}"
+            ),
             widget.Sep(linewidth=1, padding=10),
             widget.TextBox(
                 text="",
