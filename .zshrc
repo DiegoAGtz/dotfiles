@@ -1,11 +1,22 @@
 [[ $- != *i* ]] && return
 
-export HISTCONTROL=ignoredups:erasedups
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt HIST_IGNORE_DUPS
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt SHARE_HISTORY
 
-set -o vi
-bind -m vi-command 'Control-l: clear-screen'
-bind -m vi-insert 'Control-l: clear-screen'
-bind "set completion-ignore-case on"
+setopt AUTO_CD
+
+[[ -d "$HOME/.zfunc" ]] && fpath=($HOME/.zfunc $fpath)
+autoload -Uz compinit
+compinit
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
+bindkey -v
+bindkey -M vicmd '^l' clear-screen
+bindkey -M viins '^l' clear-screen
 
 export TERM="xterm-256color"
 export EDITOR=nvim
@@ -40,6 +51,10 @@ if [[ -d "$HOME/.deno" ]]; then
     export PATH="$DENO_INSTALL/bin:$PATH"
 fi
 
+# pnpm
+export PNPM_HOME="$HOME/.local/share/pnpm"
+[[ ":$PATH:" != *":$PNPM_HOME:"* ]] && export PATH="$PNPM_HOME:$PATH"
+
 # Herd Lite (PHP)
 export PATH="$HOME/.config/herd-lite/bin:$PATH"
 export PHP_INI_SCAN_DIR="$HOME/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
@@ -64,7 +79,6 @@ alias l...='eza -al --color=always --group-directories-first ../../../'
 alias grep='grep --color=auto'
 alias cat='bat'
 alias pn=pnpm
-alias t="typioca"
 alias kubectl="minikube kubectl --"
 alias v=nvim_finder
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
@@ -77,20 +91,10 @@ nvim_finder() {
     [[ -n $selection ]] && nvim "$selection"
 }
 
-if [[ -f /usr/share/nvm/init-nvm.sh ]]; then
-    source /usr/share/nvm/init-nvm.sh
-else
-    export NVM_DIR="$HOME/.nvm"
-    [[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
-    [[ -s "$NVM_DIR/bash_completion" ]] && source "$NVM_DIR/bash_completion"
-fi
+export NVM_DIR="$HOME/.nvm"
+[[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
+[[ -s "$NVM_DIR/bash_completion" ]] && source "$NVM_DIR/bash_completion"
 
-export PNPM_HOME="$HOME/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
+[[ -f /usr/share/nvm/init-nvm.sh ]] && source /usr/share/nvm/init-nvm.sh
 
-[ -f "$HOME/.dart-cli-completion/bash-config.bash" ] && source "$HOME/.dart-cli-completion/bash-config.bash"
-
-eval "$(starship init bash)"
+eval "$(starship init zsh)"

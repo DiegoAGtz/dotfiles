@@ -30,7 +30,7 @@ cyan    = '#46d9ff'
 white   = '#efefef'
 
 [font]
-size = 7.0
+size = 11
 
 [font.bold]
 family = "FiraCode Nerd Font"
@@ -56,6 +56,6 @@ key = "F11"
 history = 50000
 
 [window]
-opacity = 0.9
+opacity = 1
 
 [terminal]

@@ -6,13 +6,12 @@ function run {
   fi
 }
 
-run autorandr --change &
+run kanshi &
 run nm-applet &
-run nitrogen --restore &
-run picom &
 run blueman-applet &
-run udiskie -t &
-# run volumeicon &
+run udiskie -t --appindicator &
+run pasystray &
 run /bin/lxqt-policykit-agent &
 run emacs --daemon &
-run pasystray &
+run flameshot &
+swaybg -i ~/Pictures/wallpapers/0277.jpg -m fill &

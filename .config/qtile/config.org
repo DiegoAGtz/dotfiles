@@ -1,13 +1,36 @@
+#+title: Qtile Configuration
+#+author: DiegoAGtz
+#+property: header-args:python :tangle config.py
+
+* Qtile Configuration
+
+Personal Qtile window manager configuration for a dual-screen Wayland setup.
+To apply changes, tangle this file with ~C-c C-v t~, then reload Qtile with ~Mod+Ctrl+R~.
+
+* Imports
+
+#+begin_src python
 import os
 import subprocess
 from libqtile import bar, layout, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen, KeyChord
 from libqtile.backend.wayland import InputConfig
 from libqtile.lazy import lazy
+#+end_src
 
+* Core Variables
+
+#+begin_src python
 mod = "mod4"
 terminal = "kitty"
+#+end_src
 
+* Color Scheme
+
+Using the [[https://catppuccin.com/][Catppuccin]] Mocha palette. Colors are referenced by semantic name
+throughout the config so switching flavors only requires updating this dict.
+
+#+begin_src python
 def init_catppuccin():
     return {
         "rosewater": "#f5d0dc",
@@ -40,7 +63,11 @@ def init_catppuccin():
 
 
 catppuccin = init_catppuccin()
+#+end_src
 
+* Widget Defaults
+
+#+begin_src python
 def init_widgets_defaults():
     return dict(
         font="FiraCode Nerd Font",
@@ -51,7 +78,13 @@ def init_widgets_defaults():
 
 
 widget_defaults = init_widgets_defaults()
+#+end_src
 
+* Keybindings
+
+** Media and Brightness
+
+#+begin_src python
 keys = [
     Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 5%-")),
     Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set +5%")),
@@ -71,7 +104,11 @@ keys = [
 
     Key([mod], "equal", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +2%")),
     Key([mod], "minus", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -2%")),
+#+end_src
 
+** Window Navigation
+
+#+begin_src python
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
     Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
@@ -101,7 +138,11 @@ keys = [
         lazy.layout.shuffle_up(),
         desc="Move window up"
     ),
+#+end_src
 
+** Window Resizing
+
+#+begin_src python
     Key(
         [mod, "shift"], "h",
         lazy.layout.grow_left(),
@@ -143,7 +184,11 @@ keys = [
         lazy.layout.toggle_split(),
         desc="Toggle between split and unsplit sides of stack",
     ),
+#+end_src
 
+** Application Launchers
+
+#+begin_src python
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
@@ -167,7 +212,15 @@ keys = [
     Key([mod], "b", lazy.spawn("brave")),
     Key([mod], "r", lazy.spawn("dmenu_run -h 24"), desc="Spawn dmenu"),
     Key([mod], "p", lazy.widget["pomodoro"].toggle_active(), desc="Toggle Pomodoro"),
+#+end_src
 
+** System Controls
+
+~Mod+Shift+R~ opens a KeyChord menu for less frequent system actions.
+The ~dm-*~ scripts are dmenu-based utilities (logout, notes, web search, config editor).
+~Mod+Alt+L~ locks the screen with slock; ~Mod+Alt+Q~ triggers the logout menu.
+
+#+begin_src python
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
 
     KeyChord([mod, "shift"], "r", [
@@ -184,7 +237,11 @@ keys = [
     Key([mod, "mod1"], "l", lazy.spawn("slock")),
     Key([mod, "mod1"], "q", lazy.spawn("dm-logout")),
 ]
+#+end_src
 
+* Groups
+
+#+begin_src python
 groups = [
         Group(name="1"),
         Group(name="2"),
@@ -211,7 +268,15 @@ for i in groups:
             ),
         ]
     )
+#+end_src
 
+* Layouts
+
+The primary layout is ~Columns~ (tiling with multiple column support). ~Max~ is kept
+as a quick full-screen tile mode. The border colors use the Catppuccin palette:
+focused windows get ~sky~, unfocused get ~surface0~.
+
+#+begin_src python
 def init_layout_theme():
     return {
         "margin": 1,
@@ -227,7 +292,14 @@ layouts = [
     layout.Columns(**layout_theme),
     layout.Max(**layout_theme),
 ]
+#+end_src
 
+* Bar Widgets
+
+Widget-level defaults use FontAwesome for icons. ~text_box_defaults~ increases the
+icon size slightly relative to text widgets.
+
+#+begin_src python
 widget_defaults = dict(
     font="FontAwesome",
     fontsize=12,
@@ -237,7 +309,14 @@ widget_defaults = dict(
 )
 extension_defaults = widget_defaults.copy()
 text_box_defaults = {'padding': 5, 'fontsize': 14}
+#+end_src
 
+** Screen 1
+
+Primary screen. Includes ~StatusNotifier~ for the system tray (nm-applet, blueman,
+udiskie, pasystray launched via autostart). No Pomodoro widget here.
+
+#+begin_src python
 def init_widgets_screen1():
     return {
         'widgets': [
@@ -302,7 +381,14 @@ def init_widgets_screen1():
         ],
         'size': 24,
     }
+#+end_src
 
+** Screen 2
+
+Secondary screen. Has the ~Pomodoro~ widget (toggled with ~Mod+P~) and no system tray,
+since ~StatusNotifier~ only works on one screen.
+
+#+begin_src python
 def init_widgets_screen2():
     return {
         'widgets': [
@@ -368,14 +454,22 @@ def init_widgets_screen2():
         ],
         'size': 24,
     }
+#+end_src
 
+* Screens
+
+#+begin_src python
 screens = [
     Screen(
         top=bar.Bar(**init_widgets_screen1()),
     ),
     Screen(top=bar.Bar(**init_widgets_screen2()))
 ]
+#+end_src
 
+* Mouse Bindings
+
+#+begin_src python
 mouse = [
     Drag(
         [mod], "Button1",
@@ -389,12 +483,48 @@ mouse = [
     ),
     Click([mod], "Button2", lazy.window.bring_to_front()),
 ]
+#+end_src
 
+* Autostart
+
+The ~run~ helper ensures each program is only launched if it isn't already running,
+making the script safe to call multiple times. ~swaybg~ sets the wallpaper;
+~kanshi~ handles multi-monitor display layout on Wayland.
+
+#+begin_src bash :tangle autostart.sh :tangle-mode (identity #o755)
+#!/bin/bash
+function run {
+  if ! pgrep -x $(basename $1 | head -c 15) 1>/dev/null;
+  then
+    $@&
+  fi
+}
+
+run kanshi &
+run nm-applet &
+run blueman-applet &
+run udiskie -t --appindicator &
+run pasystray &
+run /bin/lxqt-policykit-agent &
+run emacs --daemon &
+run flameshot &
+swaybg -i ~/Pictures/wallpapers/0277.jpg -m fill &
+#+end_src
+
+* Startup Hook
+
+Calls ~autostart.sh~ once at login via Qtile's ~startup_once~ hook.
+
+#+begin_src python
 @hook.subscribe.startup_once
 def start_once():
     home = os.path.expanduser("~")
     subprocess.call([home + "/.config/qtile/autostart.sh"])
+#+end_src
 
+* Floating Layout Rules
+
+#+begin_src python
 floating_layout = layout.Floating(
     float_rules=[
         *layout.Floating.default_float_rules,
@@ -408,7 +538,11 @@ floating_layout = layout.Floating(
         Match(title="pinentry"),  # GPG key password entry
     ]
 )
+#+end_src
 
+* Global Settings
+
+#+begin_src python
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: list
 follow_mouse_focus = False
@@ -419,7 +553,11 @@ auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True
 auto_minimize = True
+#+end_src
 
+* Wayland Settings
+
+#+begin_src python
 wl_input_rules = {
     "type:touchpad": InputConfig(tap=True),
 }
@@ -428,3 +566,4 @@ wl_xcursor_theme = None
 wl_xcursor_size = 24
 
 wmname = "LG3D"
+#+end_src

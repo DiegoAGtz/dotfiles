@@ -44,23 +44,22 @@
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
-;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
+;; `with-eval-after-load' block, otherwise Doom's defaults may override your
+;; settings. E.g.
 ;;
-;;   (after! PACKAGE
+;;   (with-eval-after-load 'PACKAGE
 ;;     (setq x y))
 ;;
 ;; The exceptions to this rule:
 ;;
 ;;   - Setting file/directory variables (like `org-directory')
 ;;   - Setting variables which explicitly tell you to set them before their
-;;     package is loaded (see 'C-h v VARIABLE' to look up their documentation).
+;;     package is loaded (see 'C-h v VARIABLE' to look them up).
 ;;   - Setting doom variables (which start with 'doom-' or '+').
 ;;
 ;; Here are some additional functions/macros that will help you configure Doom.
 ;;
 ;; - `load!' for loading external *.el files relative to this one
-;; - `use-package!' for configuring packages
-;; - `after!' for running code after a package has loaded
 ;; - `add-load-path!' for adding directories to the `load-path', relative to
 ;;   this file. Emacs searches the `load-path' when you load packages with
 ;;   `require' or `use-package'.
@@ -75,35 +74,15 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-(use-package org-roam
-  :ensure t
-  :custom
-  (org-roam-directory (file-truename "~/org/roam"))
-  :bind (("C-c n l" . org-roam-buffer-toggle)
-         ("C-c n f" . org-roam-node-find)
-         ("C-c n g" . org-roam-graph)
-         ("C-c n i" . org-roam-node-insert)
-         ("C-c n c" . org-roam-capture)
-         ;; Dailies
-         ("C-c n j" . org-roam-dailies-capture-today))
+(require 'acp)
+(require 'agent-shell)
+
+(setq agent-shell-anthropic-authentication
+      (agent-shell-anthropic-make-authentication :login t))
+(setq agent-shell-google-authentication
+      (agent-shell-google-make-authentication :login t))
+
+(use-package! claude-code-ide
+  :bind ("C-c C-'" . claude-code-ide-menu) ; Set your favorite keybinding
   :config
-  ;; If you're using a vertical completion framework, you might want a more informative completion interface
-  (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
-  (org-roam-db-autosync-mode)
-  ;; If using org-roam-protocol
-  (require 'org-roam-protocol))
-
-(use-package! websocket
-    :after org-roam)
-
-(use-package! org-roam-ui
-    :after org-roam ;; or :after org
-;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
-;;         a hookable mode anymore, you're advised to pick something yourself
-;;         if you don't care about startup time, use
-;;  :hook (after-init . org-roam-ui-mode)
-    :config
-    (setq org-roam-ui-sync-theme t
-          org-roam-ui-follow t
-          org-roam-ui-update-on-save t
-          org-roam-ui-open-on-start t))
+  (claude-code-ide-emacs-tools-setup)) ; Optionally enable Emacs MCP tools

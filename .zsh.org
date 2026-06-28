@@ -1,18 +1,67 @@
+#+TITLE: ZSH Configuration
+#+AUTHOR: DiegoAGtz
+#+PROPERTY: header-args:sh :tangle ~/.zshrc :mkdirp yes
+
+* Interactive Guard
+
+#+begin_src sh
 [[ $- != *i* ]] && return
+#+end_src
 
-export HISTCONTROL=ignoredups:erasedups
+* History
 
-set -o vi
-bind -m vi-command 'Control-l: clear-screen'
-bind -m vi-insert 'Control-l: clear-screen'
-bind "set completion-ignore-case on"
+#+begin_src sh
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt HIST_IGNORE_DUPS
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt SHARE_HISTORY
+#+end_src
 
+* Options
+
+#+begin_src sh
+setopt AUTO_CD
+#+end_src
+
+* Completion Setup
+
+~fpath~ additions must come before ~compinit~. Drop generated completion
+scripts into =~/.zfunc/= and they will be picked up automatically.
+
+To regenerate completions:
+- Poetry: ~poetry completions zsh > ~/.zfunc/_poetry~
+- FVM: ~fvm completion --shell zsh > ~/.zfunc/_fvm~
+
+#+begin_src sh
+[[ -d "$HOME/.zfunc" ]] && fpath=($HOME/.zfunc $fpath)
+autoload -Uz compinit
+compinit
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+#+end_src
+
+* Vi Mode & Key Bindings
+
+#+begin_src sh
+bindkey -v
+bindkey -M vicmd '^l' clear-screen
+bindkey -M viins '^l' clear-screen
+#+end_src
+
+* Environment Variables
+
+#+begin_src sh
 export TERM="xterm-256color"
 export EDITOR=nvim
 export VISUAL="emacsclient -c -a emacs"
 export MANPAGER="nvim +Man!"
 export QT_QPA_PLATFORMTHEME="qt6ct"
+#+end_src
 
+* PATH
+
+#+begin_src sh
 # Cargo (Rust)
 [[ -d "$HOME/.cargo" ]] && export PATH="$HOME/.cargo/bin:$PATH"
 
@@ -40,19 +89,32 @@ if [[ -d "$HOME/.deno" ]]; then
     export PATH="$DENO_INSTALL/bin:$PATH"
 fi
 
+# pnpm
+export PNPM_HOME="$HOME/.local/share/pnpm"
+[[ ":$PATH:" != *":$PNPM_HOME:"* ]] && export PATH="$PNPM_HOME:$PATH"
+
 # Herd Lite (PHP)
 export PATH="$HOME/.config/herd-lite/bin:$PATH"
 export PHP_INI_SCAN_DIR="$HOME/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
 
 # opencode
 export PATH="$HOME/.opencode/bin:$PATH"
+#+end_src
 
+* Aliases
+** Navigation
+
+#+begin_src sh
 alias ..='cd ..'
 alias ...='cd ../..'
 alias .3='cd ../../..'
 alias .4='cd ../../../..'
 alias .5='cd ../../../../..'
+#+end_src
 
+** Listing (eza)
+
+#+begin_src sh
 alias ls='eza -al --color=always --group-directories-first'
 alias la='eza -a --color=always --group-directories-first'
 alias ll='eza -l --color=always --group-directories-first'
@@ -60,37 +122,46 @@ alias lt='eza -aT --color=always --group-directories-first'
 alias l.='eza -al --color=always --group-directories-first ../'
 alias l..='eza -al --color=always --group-directories-first ../../'
 alias l...='eza -al --color=always --group-directories-first ../../../'
+#+end_src
 
+** Tools
+
+#+begin_src sh
 alias grep='grep --color=auto'
 alias cat='bat'
 alias pn=pnpm
-alias t="typioca"
 alias kubectl="minikube kubectl --"
 alias v=nvim_finder
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 alias doom='~/.config/emacs/bin/doom'
 alias assume='. assume'
+#+end_src
 
+* Functions
+
+#+begin_src sh
 nvim_finder() {
     local selection
     selection=$(fd --type f --hidden --exclude .git | fzf-tmux -p --reverse)
     [[ -n $selection ]] && nvim "$selection"
 }
+#+end_src
 
-if [[ -f /usr/share/nvm/init-nvm.sh ]]; then
-    source /usr/share/nvm/init-nvm.sh
-else
-    export NVM_DIR="$HOME/.nvm"
-    [[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
-    [[ -s "$NVM_DIR/bash_completion" ]] && source "$NVM_DIR/bash_completion"
-fi
+* Tool Integrations
+** NVM
 
-export PNPM_HOME="$HOME/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
+#+begin_src sh
+export NVM_DIR="$HOME/.nvm"
+[[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
+[[ -s "$NVM_DIR/bash_completion" ]] && source "$NVM_DIR/bash_completion"
 
-[ -f "$HOME/.dart-cli-completion/bash-config.bash" ] && source "$HOME/.dart-cli-completion/bash-config.bash"
+[[ -f /usr/share/nvm/init-nvm.sh ]] && source /usr/share/nvm/init-nvm.sh
+#+end_src
 
-eval "$(starship init bash)"
+** Starship
+
+Must come last so the prompt initializes after everything else is set up.
+
+#+begin_src sh
+eval "$(starship init zsh)"
+#+end_src

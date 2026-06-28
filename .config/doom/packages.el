@@ -1,8 +1,13 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; $DOOMDIR/packages.el
 
-;; To install a package with Doom you must declare them here and run 'doom sync'
-;; on the command line, then restart Emacs for the changes to take effect -- or
+;; To install a package:
+;;
+;;   1. Declare them here in a `package!' statement,
+;;   2. Run 'doom sync' in the shell,
+;;   3. Restart Emacs.
+;;
+;; Use 'C-h f package\!' to look up documentation for the `package!' macro.
 
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
@@ -48,6 +53,9 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;; (unpin! t)
 
-(unpin! org-roam)
-(package! org-roam-ui)
-(package! prisma-mode :recipe (:host github :repo "pimeys/emacs-prisma-mode" :branch "main"))
+(package! shell-maker)
+(package! acp)
+(package! agent-shell)
+
+(package! claude-code-ide
+  :recipe (:host github :repo "manzaltu/claude-code-ide.el"))
