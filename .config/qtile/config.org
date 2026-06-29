@@ -522,6 +522,22 @@ def start_once():
     subprocess.call([home + "/.config/qtile/autostart.sh"])
 #+end_src
 
+* Screen Reconfiguration Hook
+
+When an HDMI monitor is unplugged, XWayland tries to update properties on windows
+that were on the removed screen, causing a fatal xcb error that kills Qtile.
+This hook runs after screen reconfiguration and moves any windowless windows
+(those whose screen reference became ~None~) to screen 0 before XWayland panics.
+
+#+begin_src python
+@hook.subscribe.screens_reconfigured
+def move_windows_on_reconfig():
+    for group in qtile.groups:
+        for window in group.windows:
+            if window.screen is None:
+                window.togroup(qtile.screens[0].group.name)
+#+end_src
+
 * Floating Layout Rules
 
 #+begin_src python

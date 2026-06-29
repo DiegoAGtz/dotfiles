@@ -72,103 +72,103 @@ keys = [
     Key([mod], "equal", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +2%")),
     Key([mod], "minus", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -2%")),
 
-    Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
-    Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
-    Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
-    Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
-    Key(
-        [mod], "backslash",
-        lazy.layout.next(),
-        desc="Move window focus to other window"
-    ),
-    Key(
-        [mod, "control"], "h",
-        lazy.layout.shuffle_left(),
-        desc="Move window to the left"
-    ),
-    Key(
-        [mod, "control"], "l",
-        lazy.layout.shuffle_right(),
-        desc="Move window to the right"
-    ),
-    Key(
-        [mod, "control"], "j",
-        lazy.layout.shuffle_down(),
-        desc="Move window down"
-    ),
-    Key(
-        [mod, "control"], "k",
-        lazy.layout.shuffle_up(),
-        desc="Move window up"
-    ),
+Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
+Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
+Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
+Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
+Key(
+    [mod], "backslash",
+    lazy.layout.next(),
+    desc="Move window focus to other window"
+),
+Key(
+    [mod, "control"], "h",
+    lazy.layout.shuffle_left(),
+    desc="Move window to the left"
+),
+Key(
+    [mod, "control"], "l",
+    lazy.layout.shuffle_right(),
+    desc="Move window to the right"
+),
+Key(
+    [mod, "control"], "j",
+    lazy.layout.shuffle_down(),
+    desc="Move window down"
+),
+Key(
+    [mod, "control"], "k",
+    lazy.layout.shuffle_up(),
+    desc="Move window up"
+),
 
-    Key(
-        [mod, "shift"], "h",
-        lazy.layout.grow_left(),
-        lazy.layout.shrink(),
-        lazy.layout.decrease_ratio(),
-        lazy.layout.add(),
-        desc="Grow window to the left"
-    ),
-    Key(
-        [mod, "shift"], "l",
-        lazy.layout.grow_right(),
-        lazy.layout.grow(),
-        lazy.layout.increase_ratio(),
-        lazy.layout.delete(),
-        desc="Grow window to the right"
-    ),
-    Key(
-        [mod, "shift"], "j",
-        lazy.layout.grow_down(),
-        lazy.layout.shrink(),
-        lazy.layout.increase_nmaster(),
-        desc="Grow window down"
-    ),
-    Key(
-        [mod, "shift"], "k",
-        lazy.layout.grow_up(),
-        lazy.layout.grow(),
-        lazy.layout.decrease_nmaster(),
-        desc="Grow window up"
-    ),
-    Key(
-        [mod], "n",
-        lazy.layout.normalize(),
-        desc="Reset all window sizes"
-    ),
-    Key(
-        [mod, "shift"],
-        "Return",
-        lazy.layout.toggle_split(),
-        desc="Toggle between split and unsplit sides of stack",
-    ),
+Key(
+    [mod, "shift"], "h",
+    lazy.layout.grow_left(),
+    lazy.layout.shrink(),
+    lazy.layout.decrease_ratio(),
+    lazy.layout.add(),
+    desc="Grow window to the left"
+),
+Key(
+    [mod, "shift"], "l",
+    lazy.layout.grow_right(),
+    lazy.layout.grow(),
+    lazy.layout.increase_ratio(),
+    lazy.layout.delete(),
+    desc="Grow window to the right"
+),
+Key(
+    [mod, "shift"], "j",
+    lazy.layout.grow_down(),
+    lazy.layout.shrink(),
+    lazy.layout.increase_nmaster(),
+    desc="Grow window down"
+),
+Key(
+    [mod, "shift"], "k",
+    lazy.layout.grow_up(),
+    lazy.layout.grow(),
+    lazy.layout.decrease_nmaster(),
+    desc="Grow window up"
+),
+Key(
+    [mod], "n",
+    lazy.layout.normalize(),
+    desc="Reset all window sizes"
+),
+Key(
+    [mod, "shift"],
+    "Return",
+    lazy.layout.toggle_split(),
+    desc="Toggle between split and unsplit sides of stack",
+),
 
-    Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
-    Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-    Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
-    Key(
-        [mod],
-        "f",
-        lazy.window.toggle_fullscreen(),
-        desc="Toggle fullscreen on the focused window",
-    ),
+Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
+Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
+Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
+Key(
+    [mod],
+    "f",
+    lazy.window.toggle_fullscreen(),
+    desc="Toggle fullscreen on the focused window",
+),
 
-    Key([mod], "space", lazy.widget["keyboardlayout"].next_keyboard()),
+Key([mod], "space", lazy.widget["keyboardlayout"].next_keyboard()),
 
-    Key([mod], "period", lazy.next_screen()),
-    Key([mod], "comma", lazy.prev_screen()),
+Key([mod], "period", lazy.next_screen()),
+Key([mod], "comma", lazy.prev_screen()),
 
-    Key([mod], "e", lazy.spawn("pcmanfm")),
-    Key([mod], "t", lazy.spawn("Telegram")),
-    Key([mod], "z", lazy.spawn("zapzap")),
-    Key([mod], "o", lazy.spawn("emacsclient -c -a 'emacs'")),
-    Key([mod], "s", lazy.spawn("strawberry")),
-    Key([mod], "b", lazy.spawn("brave")),
-    Key([mod], "r", lazy.spawn("dmenu_run -h 24"), desc="Spawn dmenu"),
-    Key([mod], "p", lazy.widget["pomodoro"].toggle_active(), desc="Toggle Pomodoro"),
+Key([mod], "e", lazy.spawn("pcmanfm")),
+Key([mod], "t", lazy.spawn("Telegram")),
+Key([mod], "z", lazy.spawn("zapzap")),
+Key([mod], "o", lazy.spawn("emacsclient -c -a 'emacs'")),
+Key([mod], "s", lazy.spawn("strawberry")),
+Key([mod], "b", lazy.spawn("brave")),
+Key([mod], "r", lazy.spawn("dmenu_run -h 24"), desc="Spawn dmenu"),
+Key([mod], "p", lazy.widget["pomodoro"].toggle_active(), desc="Toggle Pomodoro"),
 
-    Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
+Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
 
     KeyChord([mod, "shift"], "r", [
         Key([], "q", lazy.spawn("dm-logout")),
@@ -394,6 +394,13 @@ mouse = [
 def start_once():
     home = os.path.expanduser("~")
     subprocess.call([home + "/.config/qtile/autostart.sh"])
+
+@hook.subscribe.screens_reconfigured
+def move_windows_on_reconfig():
+    for group in qtile.groups:
+        for window in group.windows:
+            if window.screen is None:
+                window.togroup(qtile.screens[0].group.name)
 
 floating_layout = layout.Floating(
     float_rules=[
