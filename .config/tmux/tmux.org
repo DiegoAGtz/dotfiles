@@ -1,0 +1,187 @@
+#+title: Tmux Configuration
+#+author: DiegoAGtz
+#+property: header-args:conf :tangle tmux.conf
+
+* Tmux Configuration
+
+Personal tmux configuration using the [[https://github.com/doomemacs/themes/blob/master/themes/doom-one-theme.el][Doom One]] color scheme.
+To apply changes, tangle this file with ~C-c C-v t~, then reload tmux with ~tmux source ~/.config/tmux/tmux.conf~.
+
+* Color Scheme
+
+Doom One palette sourced from [[https://github.com/doomemacs/themes/blob/master/themes/doom-one-theme.el][doom-one-theme.el]].
+Colors are stored as tmux user-options (~@doom_*~) and referenced throughout via ~#{@doom_*}~ in format strings.
+This block tangles to ~doom-one.conf~, which is loaded by ~tmux.conf~ at startup via ~source-file~.
+
+#+begin_src conf :tangle doom-one.conf
+# Backgrounds
+set -g @doom_bg        "#282c34"
+set -g @doom_bg_alt    "#21242b"
+set -g @doom_base0     "#1B2229"
+set -g @doom_base1     "#1c1f24"
+set -g @doom_base2     "#202328"
+set -g @doom_base3     "#23272e"
+set -g @doom_base4     "#3f444a"
+
+# Mid-tones / borders / inactive text
+set -g @doom_base5     "#5B6268"
+set -g @doom_base6     "#73797e"
+set -g @doom_base7     "#9ca0a4"
+set -g @doom_base8     "#DFDFDF"
+
+# Foregrounds
+set -g @doom_fg        "#bbc2cf"
+set -g @doom_fg_alt    "#5B6268"
+
+# Accent colors
+set -g @doom_red       "#ff6c6b"
+set -g @doom_orange    "#da8548"
+set -g @doom_yellow    "#ECBE7B"
+set -g @doom_green     "#98be65"
+set -g @doom_teal      "#4db5bd"
+set -g @doom_blue      "#51afef"
+set -g @doom_dark_blue "#2257A0"
+set -g @doom_magenta   "#c678dd"
+set -g @doom_violet    "#a9a1e1"
+set -g @doom_cyan      "#46D9FF"
+set -g @doom_dark_cyan "#5699AF"
+#+end_src
+
+* Base Settings
+
+#+begin_src conf
+set  -g  mouse on
+set  -ag terminal-overrides ',xterm-256color:RGB'
+set  -g  default-terminal 'tmux-256color'
+setw -g  pane-base-index 1
+set  -g  base-index 1
+
+set-window-option -g mode-keys vi
+
+source-file ~/.config/tmux/doom-one.conf
+#+end_src
+
+* Status Bar
+
+** Base Style
+
+#+begin_src conf
+set -g status-style      "bg=#{@doom_bg_alt},fg=#{@doom_fg}"
+set -g status-position   bottom
+set -g status-right-length 100
+set -g status-left-length  100
+#+end_src
+
+** Status Left
+
+Session name displayed as a colored pill with a Powerline arrow transition.
+Requires a Nerd Font or Powerline-patched font for the ~~ separator.
+
+#+begin_src conf
+set -g status-left \
+  "#[bg=#{@doom_green},fg=#{@doom_bg},bold] #S #[bg=#{@doom_bg_alt},fg=#{@doom_blue},none]"
+#+end_src
+
+** Status Right
+
+Current time (muted) followed by the hostname in a pill matching the active window style.
+
+#+begin_src conf
+set -g status-right \
+  "#[fg=#{@doom_base6},bg=#{@doom_bg_alt}] %H:%M #[fg=#{@doom_blue},bg=#{@doom_bg_alt}]#[fg=#{@doom_bg},bg=#{@doom_blue},bold] #h "
+#+end_src
+
+** Window Tabs
+
+Inactive windows use a dimmed foreground. The active window is rendered as a blue pill
+flanked by Powerline arrows, consistent with the status-right pill.
+
+#+begin_src conf
+set -g window-status-separator      ""
+set -g window-status-format         " #[fg=#{@doom_base6}]#I  #W "
+set -g window-status-current-format \
+  "#[fg=#{@doom_blue},bg=#{@doom_bg_alt}]#[fg=#{@doom_bg},bg=#{@doom_blue},bold] #I  #W #[fg=#{@doom_blue},bg=#{@doom_bg_alt},none]"
+#+end_src
+
+** Activity and Bell
+
+#+begin_src conf
+set -g window-status-activity-style "fg=#{@doom_yellow},bg=#{@doom_bg_alt},none"
+set -g window-status-bell-style     "fg=#{@doom_red},bg=#{@doom_bg_alt},bold"
+#+end_src
+
+* Pane Borders
+
+#+begin_src conf
+set -g pane-border-style        "fg=#{@doom_base4}"
+set -g pane-active-border-style "fg=#{@doom_blue}"
+#+end_src
+
+* Command Line and Copy Mode
+
+The command prompt and copy-mode selection use ~dark_blue~ as the background,
+mirroring the doom-one selection color (~#2257A0~).
+
+#+begin_src conf
+set -g message-style         "bg=#{@doom_dark_blue},fg=#{@doom_fg}"
+set -g message-command-style "bg=#{@doom_dark_blue},fg=#{@doom_fg}"
+set -g mode-style            "bg=#{@doom_dark_blue},fg=#{@doom_fg}"
+#+end_src
+
+* Plugins
+
+#+begin_src conf
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'christoomey/vim-tmux-navigator'
+set -g @plugin 'tmux-plugins/tmux-yank'
+#+end_src
+
+* Keybindings
+
+** General
+
+#+begin_src conf
+bind C-l send-keys 'C-l'
+#+end_src
+
+** Window Navigation
+
+#+begin_src conf
+bind -n M-H previous-window
+bind -n M-L next-window
+#+end_src
+
+** Pane Resizing
+
+#+begin_src conf
+bind -n M-h resize-p -L 5
+bind -n M-j resize-p -D 5
+bind -n M-k resize-p -U 5
+bind -n M-l resize-p -R 5
+#+end_src
+
+** Copy Mode
+
+#+begin_src conf
+bind -T copy-mode-vi C-v send-keys -X rectangle-toggle
+bind -T copy-mode-vi v   send-keys -X begin-selection
+bind -T copy-mode-vi y   send-keys -X copy-selection-add-cancel
+#+end_src
+
+** Pane Splitting
+
+Open new panes in the current working directory.
+
+#+begin_src conf
+bind '"' split-window -v -c "#{pane_current_path}"
+bind '%' split-window -h -c "#{pane_current_path}"
+#+end_src
+
+* Plugin Manager
+
+TPM must be initialized at the very end of the config.
+
+#+begin_src conf
+run '~/.config/tmux/tpm/tpm'
+#+end_src
