@@ -52,7 +52,7 @@
 ;;
 ;; The exceptions to this rule:
 ;;
-;;   - Setting file/directory variables (like `org-directory')
+;;   - Setting file/directory variablrs (like `org-directory')
 ;;   - Setting variables which explicitly tell you to set them before their
 ;;     package is loaded (see 'C-h v VARIABLE' to look them up).
 ;;   - Setting doom variables (which start with 'doom-' or '+').
@@ -74,15 +74,14 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-(require 'acp)
-(require 'agent-shell)
+;; Bind C-h/j/k/l globally across all Evil states
+(map! :nvime "C-h" #'evil-window-left
+      :nvime "C-j" #'evil-window-down
+      :nvime "C-k" #'evil-window-up
+      :nvime "C-l" #'evil-window-right)
 
-(setq agent-shell-anthropic-authentication
-      (agent-shell-anthropic-make-authentication :login t))
-(setq agent-shell-google-authentication
-      (agent-shell-google-make-authentication :login t))
-
-(use-package! claude-code-ide
-  :bind ("C-c C-'" . claude-code-ide-menu) ; Set your favorite keybinding
-  :config
-  (claude-code-ide-emacs-tools-setup)) ; Optionally enable Emacs MCP tools
+;; Force vterm to pass those exact keys back to Emacs
+(after! vterm
+  (setq vterm-keymap-exceptions
+        (append vterm-keymap-exceptions
+                '("C-h" "C-j" "C-k" "C-l"))))

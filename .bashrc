@@ -45,7 +45,9 @@ export PATH="$HOME/.config/herd-lite/bin:$PATH"
 export PHP_INI_SCAN_DIR="$HOME/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
 
 # opencode
-export PATH="$HOME/.opencode/bin:$PATH"
+if [[ -d "$HOME/.opencode" ]]; then
+    export PATH="$HOME/.opencode/bin:$PATH"
+fi
 
 alias ..='cd ..'
 alias ...='cd ../..'

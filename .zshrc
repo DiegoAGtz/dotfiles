@@ -19,8 +19,8 @@ bindkey -M vicmd '^l' clear-screen
 bindkey -M viins '^l' clear-screen
 
 export TERM="xterm-256color"
-export EDITOR=nvim
-export VISUAL="emacsclient -c -a emacs"
+export EDITOR="emacsclient -r"
+export VISUAL="emacsclient -r -a emacs"
 export MANPAGER="nvim +Man!"
 export QT_QPA_PLATFORMTHEME="qt6ct"
 
@@ -95,5 +95,7 @@ export NVM_DIR="$HOME/.nvm"
 [[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
 [[ -s "/usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] && source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 [[ -f /usr/share/nvm/init-nvm.sh ]] && source /usr/share/nvm/init-nvm.sh
+
+[[ -f /usr/share/zsh/plugins/zsh-autosuggestions ]] && source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 eval "$(starship init zsh)"

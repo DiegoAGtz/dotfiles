@@ -1,0 +1,13 @@
+profile qhd {
+    output eDP-1 position 0,0 mode 1920x1080
+    output "Xiaomi Corporation Mi Monitor 6306110022380" position 1920,0 mode 2560x1440
+}
+
+profile dual {
+    output HDMI-A-2 position 0,0 mode 1920x1080
+    output eDP-1 position 0,1080 mode 1920x1080
+}
+
+profile laptop {
+    output eDP-1 position 0,0 mode 1920x1080
+}
